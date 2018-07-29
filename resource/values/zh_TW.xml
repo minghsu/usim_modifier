@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resource>
+  <string name="not_defined">未定義的字串資源</string>
+  <string name="app_name">USIM 修改者, 版本 %d.%d</string>
+</resource>
