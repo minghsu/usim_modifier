@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resource>
   <string name="not_defined">未定義的字串資源</string>
-  <string name="app_name">USIM 修改者, 版本 %d.%d</string>
+  <string name="app_name">USIM 修改員, 版本 %d.%d, (C)2018 Hsu Chih-Ming</string>
+  <string name="card_reader_detected">已偵測到下列的智慧卡讀卡機:</string>
+  <string name="card_reader_not_detected">未偵測到智慧卡讀卡機!</string>
 </resource>

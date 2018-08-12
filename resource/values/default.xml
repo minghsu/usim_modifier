@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resource>
+  <!-- common string resource -->
+  <string name="list_of_card_reader">%2d - %s</string>
+
+  <!-- en_US -->
   <string name="not_defined">This string was not defined</string>
-  <string name="app_name">USIM modifier, version %d.%d</string>
+  <string name="app_name">USIM modifier, version %d.%d, (C)2018 Hsu Chih-Ming</string>
+  <string name="card_reader_detected">Detected below smart card readers:</string>
+  <string name="card_reader_not_detected">Can't detected any smart card readers!</string>
 </resource>

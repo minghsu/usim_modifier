@@ -7,6 +7,11 @@ import locale
 
 from lxml import etree
 
+DEF_RESOURCE_FATAL = "Can't found any resource files!!"
+
+DEF_MAIN_VER_NO = 1
+DEF_MAJOR_VER_NO = 0
+
 
 class resource:
     def __init__(self):
@@ -35,6 +40,20 @@ class resource:
         except:
             self.__locale_values = None
 
+    def get_app_name(self):
+        return (self.get_string('app_name') % (DEF_MAIN_VER_NO, DEF_MAJOR_VER_NO))
+
     def get_string(self, arg_key):
-        print(self.__default_values)
-        print(self.__locale_values)
+        if (self.__locale_values != None):
+            if arg_key in self.__locale_values:
+                return self.__locale_values[arg_key]
+            elif arg_key not in self.__default_values:
+                return self.__locale_values['not_defined']
+
+        if (self.__default_values != None):
+            if arg_key in self.__default_values:
+                return self.__default_values[arg_key]
+            else:
+                return self.__default_values['not_defined']
+
+        return DEF_RESOURCE_FATAL

@@ -105,3 +105,7 @@ venv.bak/
 
 # vs code
 .vscode/
+
+# customization
+logfiles
+.DS_Store
