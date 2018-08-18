@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 from smartcard.System import readers
-from smartcard.Exceptions import NoCardException
+from constant.error import ERROR
 
 
 class reader:

@@ -10,5 +10,6 @@
   <string name="card_reader_not_detected">Error!! Can't detected any smart card readers.</string>
   <string name="list_card_name">Smart Card Reader Model Name</string>
   <string name="card_reader_connecting">Connecting to "%s" card reader ...</string>
-  <string name="card_not_inserted">Error!! Can't detetced the smart card.</string>
+  <string name="card_is_absent">Error!! Can't detetced the smart card.</string>
+  <string name="unknow_error">Error! Can't identify problem!</string>
 </resource>

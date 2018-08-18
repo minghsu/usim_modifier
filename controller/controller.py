@@ -5,6 +5,7 @@ from resource.resource import resource
 from model.smartcard import smartcard
 from utility.switch import switch
 from constant.state import STATE
+from constant.error import ERROR
 
 import view.layout as layout
 
@@ -55,5 +56,18 @@ class controller:
                     self.__smartcard.get_reader(self.__reader_idx))
                 layout.print_layout(
                     "LAYOUT_FORMAL", tmp_content)
+
+                err_code = self.__smartcard.connect_to_reader(
+                    self.__reader_idx)
+
+                if err_code == ERROR.ERR_CARD_ABSENT:
+                    layout.print_layout(
+                        "LAYOUT_ERROR", self.__resource.get_string(
+                            "card_is_absent"))
+                elif err_code != ERROR.ERR_NONE:
+                    layout.print_layout(
+                        "LAYOUT_ERROR", self.__resource.get_string(
+                            "unknow_error"))
+
                 self.__state = STATE.EXIT
         return True

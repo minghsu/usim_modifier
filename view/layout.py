@@ -6,7 +6,7 @@ colorama.init()
 
 
 DICT_LAYOUT = {
-    "LAYOUT_FORMAL": ("  %s"),
+    "LAYOUT_FORMAL": ("  %s\n"),
     "LAYOUT_WELCOME": ("\n"
                        "  " + colorama.Style.BRIGHT + "%s" + colorama.Style.NORMAL + "\n"),
     "LAYOUT_ERROR": ("  " + colorama.Fore.RED + "%s" + colorama.Fore.RESET + "\n"),
