@@ -7,5 +7,7 @@ from enum import Enum, unique
 @unique
 class STATE(Enum):
     EXIT = 0
-    START_UP = 1      # System start up
-    INITIAL_READER = 2      # Initial all smart card reader
+    WELCOME = 1             # Welcome message
+    SCAN = 2                # Scan Readers
+    INITIAL = 3             # Connect to card reader and do some initial procedure
+    READER = 4              # Select which card reader will use

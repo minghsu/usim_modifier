@@ -1,11 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resource>
   <!-- common string resource -->
-  <string name="list_of_card_reader">%2d - %s</string>
+  <string name="app_name">USIM modifier Version %d.%d for Python 3, (C)2018 Hsu Chih-Ming</string>
+  <string name="list_card_id">ID</string>
 
   <!-- en_US -->
   <string name="not_defined">This string was not defined</string>
-  <string name="app_name">USIM modifier, version %d.%d, (C)2018 Hsu Chih-Ming</string>
   <string name="card_reader_detected">Detected below smart card readers:</string>
-  <string name="card_reader_not_detected">Can't detected any smart card readers!</string>
+  <string name="card_reader_not_detected">Error!! Can't detected any smart card readers.</string>
+  <string name="list_card_name">Smart Card Reader Model Name</string>
+  <string name="card_reader_connecting">Connecting to "%s" card reader ...</string>
+  <string name="card_not_inserted">Error!! Can't detetced the smart card.</string>
 </resource>
