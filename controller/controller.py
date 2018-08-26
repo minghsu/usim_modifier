@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 from resource.resource import resource
-from model.smartcard import smartcard
+from model.modeler import modeler
 from utility.switch import switch
 from constant.state import STATE
 from constant.error import ERROR
@@ -13,7 +13,7 @@ import view.layout as layout
 class controller:
     def __init__(self):
         self.__resource = resource()
-        self.__smartcard = smartcard()
+        self.__modeler = modeler()
         self.__state = STATE.WELCOME
         self.__reader_idx = None
 
@@ -26,10 +26,10 @@ class controller:
                     "LAYOUT_WELCOME", self.__resource.get_app_name())
                 self.__state = STATE.SCAN
             if case(STATE.SCAN):
-                if (self.__smartcard.get_count() == 1):
+                if (self.__modeler.get_cardreader_count() == 1):
                     self.__state = STATE.INITIAL
                     self.__reader_idx = 0
-                elif (self.__smartcard.get_count() > 1):
+                elif (self.__modeler.get_cardreader_count() > 1):
                     tmp_content = layout.preparing_by_layout(
                         "LAYOUT_READER_LIST_HEAD",
                         self.__resource.get_string(
@@ -37,10 +37,10 @@ class controller:
                         self.__resource.get_string(
                             "list_card_name"))
 
-                    for idx in range(self.__smartcard.get_count()):
+                    for idx in range(self.__modeler.get_cardreader_count()):
                         tmp_content += layout.preparing_by_layout(
                             "LAYOUT_READER_LIST_BODY", idx,
-                            self.__smartcard.get_reader(idx))
+                            self.__modeler.get_cardreader(idx))
 
                     layout.print_string(tmp_content)
                     self.__state = STATE.READER
@@ -53,11 +53,11 @@ class controller:
                 self.__state = STATE.EXIT
             if case(STATE.INITIAL):
                 tmp_content = self.__resource.get_string("card_reader_connecting") % (
-                    self.__smartcard.get_reader(self.__reader_idx))
+                    self.__modeler.get_cardreader(self.__reader_idx))
                 layout.print_layout(
                     "LAYOUT_FORMAL", tmp_content)
 
-                err_code = self.__smartcard.connect_to_reader(
+                err_code = self.__modeler.create_connection(
                     self.__reader_idx)
 
                 if err_code == ERROR.ERR_CARD_ABSENT:

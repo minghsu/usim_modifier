@@ -4,7 +4,7 @@
   <string name="card_reader_detected">已偵測到下列的智慧卡讀卡機:</string>
   <string name="card_reader_not_detected">錯誤! 未偵測到智慧卡讀卡機!</string>
   <string name="list_card_name">讀卡機型號</string>
-  <string name="card_reader_connecting">正在連接 [%s] 讀卡機 ...</string>
+  <string name="card_reader_connecting">正在連接 [%s] 智慧卡讀卡機 ...</string>
   <string name="card_is_absent">錯誤! 智慧卡不存在!</string>
   <string name="unknow_error">錯誤! 發生無法辨試的問題!</string>
 </resource>

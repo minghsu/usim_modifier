@@ -8,4 +8,5 @@ from enum import Enum, unique
 class ERROR(Enum):
     ERR_NONE = 0
     ERR_UNKNOWN = 1
-    ERR_CARD_ABSENT = 2             # Welcome messag
+    ERR_CARD_ABSENT = 2
+    ERR_NO_RESOURCE = 3   # Such as, not connection
