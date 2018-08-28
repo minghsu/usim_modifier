@@ -25,6 +25,7 @@ class controller:
                 layout.print_layout(
                     "LAYOUT_WELCOME", self.__resource.get_app_name())
                 self.__state = STATE.SCAN
+                break
             if case(STATE.SCAN):
                 if (self.__modeler.get_cardreader_count() == 1):
                     self.__state = STATE.INITIAL
@@ -49,8 +50,10 @@ class controller:
                         "LAYOUT_ERROR", self.__resource.get_string(
                             "card_reader_not_detected"))
                     self.__state = STATE.EXIT
+                break
             if case(STATE.READER):
                 self.__state = STATE.EXIT
+                break
             if case(STATE.INITIAL):
                 tmp_content = self.__resource.get_string("card_reader_connecting") % (
                     self.__modeler.get_cardreader(self.__reader_idx))
@@ -70,4 +73,5 @@ class controller:
                             "unknow_error"))
 
                 self.__state = STATE.EXIT
+                break
         return True

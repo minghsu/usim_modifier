@@ -4,12 +4,12 @@
 from model.plugin.plugins.base_plugin import base_plugin
 
 
-class card_status(base_plugin):
+class verify_pin(base_plugin):
     def __init__(self):
         pass
 
     def summary(self):
-        return "Displayed the card status."
+        return "Verify the PIN1/PIN2"
 
     @property
     def auto_execute(self):
@@ -17,7 +17,7 @@ class card_status(base_plugin):
 
     @property
     def sort_index(self):
-        return 0x00
+        return 0x10
 
     def execute(self):
-        print ("card_status")
+        print ("verify_pin")
