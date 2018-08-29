@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-from smartcard.Exceptions import NoCardException
-from model.cardreader.cardreader import cardreader
+from model.cardreader.reader import reader
+from model.cardreader.connection import connection
 from model.plugin.plugins_center import plugins_center
 from model.apdu.apdu_factory import apdu_factory
 from constant.error import ERROR
@@ -10,7 +10,8 @@ from constant.error import ERROR
 
 class modeler:
     def __init__(self):
-        self.__cardreader = cardreader()
+        self.__cardreader = reader()
+        self.__connection = None
         self.__apdu_factory = apdu_factory()
         self.__plugins_center = None
 
@@ -25,13 +26,6 @@ class modeler:
             return ERROR.ERR_UNKNOWN
 
         self.__reader = self.__cardreader.get_reader(arg_idx)
+        self.__connection = connection(self.__reader)
 
-        try:
-            self.__connection = self.__reader.createConnection()
-            self.__connection.connect()
-            self.__plugins_center = plugins_center(self.__connection, self.__apdu_factory)
-        except NoCardException:
-            del self.__connection
-            return ERROR.ERR_CARD_ABSENT
-
-        return ERROR.ERR_NONE
+        return self.__connection.open()

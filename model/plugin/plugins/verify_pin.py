@@ -20,4 +20,4 @@ class verify_pin(base_plugin):
         return 0x10
 
     def execute(self):
-        print ("verify_pin")
+        pass

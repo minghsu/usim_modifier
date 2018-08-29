@@ -20,4 +20,4 @@ class card_status(base_plugin):
         return 0x00
 
     def execute(self):
-        print ("card_status")
+        pass
