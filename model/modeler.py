@@ -4,7 +4,6 @@
 from model.cardreader.reader import reader
 from model.cardreader.connection import connection
 from model.plugin.plugins_center import plugins_center
-from model.apdu.apdu_factory import apdu_factory
 from constant.error import ERROR
 
 
@@ -12,7 +11,6 @@ class modeler:
     def __init__(self):
         self.__cardreader = reader()
         self.__connection = None
-        self.__apdu_factory = apdu_factory()
         self.__plugins_center = None
 
     def get_cardreader_count(self):
@@ -28,4 +26,9 @@ class modeler:
         self.__reader = self.__cardreader.get_reader(arg_idx)
         self.__connection = connection(self.__reader)
 
-        return self.__connection.open()
+        ret = self.__connection.open()
+
+        if ret == ERROR.ERR_NONE:
+            self.__plugins_center = plugins_center(self.__connection)
+
+        return ret

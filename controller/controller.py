@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
+import logging
+import os.path
+
 from resource.resource import resource
 from model.modeler import modeler
 from utility.switch import switch
@@ -12,12 +15,14 @@ import view.layout as layout
 
 class controller:
     def __init__(self):
+        self.__logging = logging.getLogger(os.path.basename(__file__))
         self.__resource = resource()
         self.__modeler = modeler()
         self.__state = STATE.WELCOME
         self.__reader_idx = None
 
     def do_job(self):
+        self.__logging.debug(self.__state)
         for case in switch(self.__state):
             if case(STATE.EXIT):
                 return False

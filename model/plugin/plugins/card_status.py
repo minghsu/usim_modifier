@@ -19,5 +19,5 @@ class card_status(base_plugin):
     def sort_index(self):
         return 0x00
 
-    def execute(self):
-        pass
+    def execute(self, arg_connection):
+        arg_connection.select("3F00")

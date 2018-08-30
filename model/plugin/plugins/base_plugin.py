@@ -10,7 +10,7 @@ class base_plugin(abc.ABC):
         return NotImplemented
 
     @abc.abstractmethod
-    def execute(self):
+    def execute(self, arg_connection):
         return NotImplemented
 
     @property
