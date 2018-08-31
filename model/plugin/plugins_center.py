@@ -23,7 +23,7 @@ class plugins_center:
                 instance_class = getattr(plugin_class, name)()                
                 self.__plugins.append(
                     [name, instance_class.summary(), instance_class.auto_execute, instance_class.sort_index])
-                self.__logging.debug("plugin: %s, auto exec: %d, sort idx: %d" % (name, instance_class.auto_execute, instance_class.sort_index))
+                self.__logging.debug("Plugin Detected: %s, auto exec: %d, sort idx: %d" % (name, instance_class.auto_execute, instance_class.sort_index))
 
         # sorted by "sort_idx" column, to make sure the "card_status" is 1st plugin to execute 
         self.__plugins = sorted(self.__plugins, key=lambda sort_plugin: sort_plugin[plugin_column.COL_SORT_IDX.value])

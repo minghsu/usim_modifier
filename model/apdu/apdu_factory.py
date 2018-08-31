@@ -11,7 +11,8 @@ class apdu_factory:
         self.__logging = logging.getLogger(os.path.basename(__file__))
 
     def select(self, arg_field, arg_p1_coding, arg_p2_coding):
-        
+        self.__logging.debug("SELECT")
+
         if len(arg_field) % 2:
             self.__logging.debug("Invalid arguments: %s" % (arg_field))
         
@@ -23,5 +24,17 @@ class apdu_factory:
         ret_cmd[3] = arg_p2_coding # P2
         ret_cmd[4] = int(len(arg_field) / 2) # LC
         ret_cmd[5:] = toBytes(arg_field.upper())
+
+        return ret_cmd
+
+    def get_response(self, arg_length):
+        self.__logging.debug("GET RESPONSE")
+        ret_cmd = [0x00] * 5
+
+        ret_cmd[0] = 0x00  # CLA
+        ret_cmd[1] = 0xC0  # INS
+        ret_cmd[2] = 0x00  # P1
+        ret_cmd[3] = 0x00  # P2
+        ret_cmd[4] = arg_length # Length
 
         return ret_cmd
