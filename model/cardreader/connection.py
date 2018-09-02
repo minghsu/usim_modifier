@@ -6,7 +6,7 @@ import os.path
 from smartcard.Exceptions import NoCardException
 from smartcard.util import toHexString
 from constant.error import ERROR
-from constant.commands import CODING_P1_SELECT, CODING_P2_SELECT, APDU_CMD
+from constant.commands import CODING_P1_SELECT, CODING_P2_SELECT
 from model.apdu.apdu_factory import apdu_factory
 from model.cardreader.rsp_decoder import rsp_decoder
 

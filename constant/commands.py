@@ -5,9 +5,20 @@ from enum import Enum, unique
 
 
 @unique
-class APDU_CMD(Enum):
-    SELECT = "SELECT"
-    GET_RESPONSE = "GET_RESPONSE"
+class RESPONSE_TAG(Enum):
+    FCP_TEMPLATE = 0x62
+    DESCRIPTOR = 0x82
+    IDENTIFIER = 0x83
+    NAME = 0x84             # DF, AID
+    PROPRIETARY = 0xA5
+    LIFE_STATUS = 0x8A
+    SECURITY_8B = 0x8B
+    SECURITY_8C = 0x8C
+    SECURITY_AB = 0xAB
+    PIN_STATUS = 0xC6
+    TOTAL_SIZE = 0x81
+    FILE_SIZE = 0x80
+    SFI_IDENTIFIER = 0x88
 
 
 @unique

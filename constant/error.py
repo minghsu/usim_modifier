@@ -10,3 +10,4 @@ class ERROR(Enum):
     ERR_UNKNOWN = 1
     ERR_CARD_ABSENT = 2
     ERR_NO_RESOURCE = 3   # Such as, not connection
+    ERR_INVALID_TAG = 4   # Invalid TAG
