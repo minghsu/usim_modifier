@@ -5,20 +5,16 @@ from enum import Enum, unique
 
 
 @unique
-class RESPONSE_TAG(Enum):
-    FCP_TEMPLATE = 0x62
-    DESCRIPTOR = 0x82
-    IDENTIFIER = 0x83
-    NAME = 0x84             # DF, AID
-    PROPRIETARY = 0xA5
-    LIFE_STATUS = 0x8A
-    SECURITY_8B = 0x8B
-    SECURITY_8C = 0x8C
-    SECURITY_AB = 0xAB
-    PIN_STATUS = 0xC6
-    TOTAL_SIZE = 0x81
-    FILE_SIZE = 0x80
-    SFI_IDENTIFIER = 0x88
+class FILE_TYPE(Enum):
+    WORKING_EF = 0x00
+    INTERNAL_EF = 0x01
+    DF_OR_ADF = 0x07
+
+
+class EF_STRUCTURE(Enum):
+    TRANSPARENT = 0x01
+    LINEAR_FIXED = 0x02
+    CYCLIC = 0x06
 
 
 @unique
@@ -29,6 +25,7 @@ class CODING_P1_SELECT(Enum):
     SEL_BY_AID = 0x04
     SEL_FROM_MF = 0x08
     SEL_FROM_DF = 0x09
+
 
 @unique
 class CODING_P2_SELECT(Enum):

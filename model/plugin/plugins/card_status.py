@@ -24,4 +24,7 @@ class card_status(base_plugin):
 
     def execute(self, arg_connection):
         self.__logging.debug("execute()")
-        arg_connection.select("3F00")  # SELECT MF
+        ret_class = arg_connection.select("3F00")  # SELECT MF
+        print(ret_class)
+        ret_class = arg_connection.select(ret_class.ef_arr_id)
+        print(ret_class)
