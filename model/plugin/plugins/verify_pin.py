@@ -19,5 +19,5 @@ class verify_pin(base_plugin):
     def sort_index(self):
         return 0x10
 
-    def execute(self, arg_connection):
-        pass
+    def execute(self, arg_connection, **kwargs):
+        return None

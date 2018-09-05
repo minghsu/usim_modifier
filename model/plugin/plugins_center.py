@@ -20,20 +20,29 @@ class plugins_center:
             if (filename != "base_plugin.py" and ext == ".py"):
                 plugin_class = __import__("model.plugin.plugins.%s" %
                                           (name), fromlist=[name])
-                instance_class = getattr(plugin_class, name)()                
+                instance_class = getattr(plugin_class, name)()
                 self.__plugins.append(
                     [name, instance_class.summary(), instance_class.auto_execute, instance_class.sort_index])
-                self.__logging.debug("Plugin Detected: %s, auto exec: %d, sort idx: %d" % (name, instance_class.auto_execute, instance_class.sort_index))
+                self.__logging.debug("Plugin Detected: %s, auto exec: %d, sort idx: %d" % (
+                    name, instance_class.auto_execute, instance_class.sort_index))
 
-        # sorted by "sort_idx" column, to make sure the "card_status" is 1st plugin to execute 
-        self.__plugins = sorted(self.__plugins, key=lambda sort_plugin: sort_plugin[plugin_column.COL_SORT_IDX.value])
+        # sorted by "sort_idx" column, to make sure the "card_status" is 1st plugin to execute
+        self.__plugins = sorted(
+            self.__plugins, key=lambda sort_plugin: sort_plugin[plugin_column.COL_SORT_IDX.value])
+
+    def auto_execute(self):
+        ret_result = ""
 
         # check "auto execute" property
         for plugin in self.__plugins:
             if plugin[plugin_column.COL_AUTO_EXEC.value]:
-                pulgin_name = plugin[plugin_column.COL_NAME.value] 
+                pulgin_name = plugin[plugin_column.COL_NAME.value]
                 plugin_class = __import__("model.plugin.plugins.%s" %
                                           (pulgin_name), fromlist=[pulgin_name])
                 instance_class = getattr(plugin_class, pulgin_name)()
-                instance_class.execute(self.__connection)
 
+                tmp_str = instance_class.execute(self.__connection)
+                if tmp_str != None:
+                    ret_result += tmp_str
+
+        return ret_result

@@ -8,7 +8,6 @@ from smartcard.util import toHexString
 from constant.error import ERROR
 from constant.apdu import CODING_P1_SELECT, CODING_P2_SELECT
 from model.apdu.apdu_factory import apdu_factory
-from model.cardreader.rsp_decoder import rsp_decoder
 
 
 class connection():
@@ -37,6 +36,13 @@ class connection():
 
         return ERROR.ERR_NONE
 
+    def get_atr(self):
+        self.__logging.debug("get_atr()")
+        ret_atr = None
+        if self.__connection != None:
+            ret_atr = "ATR: " + toHexString(self.__connection.getATR())
+        return ret_atr
+
     def select(self, arg_field, arg_p1_coding=CODING_P1_SELECT.SEL_BY_FILE_ID.value, arg_p2_coding=CODING_P2_SELECT.SEL_RETURN_FCP.value):
         self.__logging.debug("select() > Field: %s, P1: %02X, P2: %02X" % (
             arg_field, arg_p1_coding, arg_p2_coding))
@@ -48,7 +54,7 @@ class connection():
             apdu_cmd = self.__apdu_factory.get_response(sw2)
             response, sw1, sw2 = self.__transmit(apdu_cmd)
 
-        return rsp_decoder(response, sw1, sw2)
+        return (response, sw1, sw2)
 
     def verify(self):
         pass

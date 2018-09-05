@@ -7,22 +7,18 @@ import os.path
 from model.plugin.plugins.base_plugin import base_plugin
 
 
-class card_status(base_plugin):
+class atr(base_plugin):
     def __init__(self):
         self.__logging = logging.getLogger(os.path.basename(__file__))
 
     def summary(self):
-        return "Displayed the card status."
+        return "Displayed the Answer To Reset (ATR)."
 
     @property
     def auto_execute(self):
-        return True
-
-    @property
-    def sort_index(self):
-        return 0x00
+        return False
 
     def execute(self, arg_connection, **kwargs):
         self.__logging.debug("execute()")
 
-        return super(card_status, self).execute_plugin("atr", arg_connection, **kwargs)
+        return arg_connection.get_atr()
