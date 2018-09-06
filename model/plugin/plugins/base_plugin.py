@@ -27,13 +27,13 @@ class base_plugin(abc.ABC):
         for k, v in kwargs.items():
             print('Optional argument %s (*kwargs): %s' % (k, v))
 
-        ret_string = None
+        ret_content = None
         try:
             plugin_class = __import__("model.plugin.plugins.%s" %
                                       (arg_plugin_name), fromlist=[arg_plugin_name])
             instance_class = getattr(plugin_class, arg_plugin_name)()
-            ret_string = instance_class.execute(arg_connection, **kwargs)
+            ret_content = instance_class.execute(arg_connection, **kwargs)
         except:
             pass
 
-        return ret_string
+        return ret_content

@@ -40,7 +40,7 @@ class connection():
         self.__logging.debug("get_atr()")
         ret_atr = None
         if self.__connection != None:
-            ret_atr = "ATR: " + toHexString(self.__connection.getATR())
+            ret_atr = self.__connection.getATR()
         return ret_atr
 
     def select(self, arg_field, arg_p1_coding=CODING_P1_SELECT.SEL_BY_FILE_ID.value, arg_p2_coding=CODING_P2_SELECT.SEL_RETURN_FCP.value):
@@ -65,8 +65,14 @@ class connection():
     def update_binary(self):
         pass
 
-    def read_record(self):
-        pass
+    def read_record(self, arg_idx, arg_length):
+        self.__logging.debug(
+            "read_record() > no: %d, length: %d" % (arg_idx, arg_length))
+
+        apdu_cmd = self.__apdu_factory.read_record(arg_idx, arg_length)
+        response, sw1, sw2 = self.__transmit(apdu_cmd)
+
+        return (response, sw1, sw2)
 
     def update_record(self):
         pass

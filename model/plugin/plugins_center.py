@@ -31,7 +31,7 @@ class plugins_center:
             self.__plugins, key=lambda sort_plugin: sort_plugin[plugin_column.COL_SORT_IDX.value])
 
     def auto_execute(self):
-        ret_result = ""
+        ret_content = ""
 
         # check "auto execute" property
         for plugin in self.__plugins:
@@ -43,6 +43,6 @@ class plugins_center:
 
                 tmp_str = instance_class.execute(self.__connection)
                 if tmp_str != None:
-                    ret_result += tmp_str
+                    ret_content += tmp_str
 
-        return ret_result
+        return ret_content

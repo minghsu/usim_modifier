@@ -4,6 +4,7 @@
 import logging
 import os.path
 
+from smartcard.util import toHexString
 from model.plugin.plugins.base_plugin import base_plugin
 
 
@@ -12,7 +13,7 @@ class atr(base_plugin):
         self.__logging = logging.getLogger(os.path.basename(__file__))
 
     def summary(self):
-        return "Displayed the Answer To Reset (ATR)."
+        return "Displayed the value of Answer To Reset (ATR)."
 
     @property
     def auto_execute(self):
@@ -21,4 +22,4 @@ class atr(base_plugin):
     def execute(self, arg_connection, **kwargs):
         self.__logging.debug("execute()")
 
-        return arg_connection.get_atr()
+        return "ATR: " + toHexString(arg_connection.get_atr()) + "\n"

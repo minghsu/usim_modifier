@@ -5,16 +5,9 @@ from enum import Enum, unique
 
 
 @unique
-class FILE_TYPE(Enum):
-    WORKING_EF = 0x00
-    INTERNAL_EF = 0x01
-    DF_OR_ADF = 0x07
-
-
-class EF_STRUCTURE(Enum):
-    TRANSPARENT = 0x01
-    LINEAR_FIXED = 0x02
-    CYCLIC = 0x06
+class FILE_ID(Enum):
+    MF = "3F00"
+    DIR = "2F00"
 
 
 @unique

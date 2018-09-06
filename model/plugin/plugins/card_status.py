@@ -25,4 +25,12 @@ class card_status(base_plugin):
     def execute(self, arg_connection, **kwargs):
         self.__logging.debug("execute()")
 
-        return super(card_status, self).execute_plugin("atr", arg_connection, **kwargs)
+        ret_content = ""
+
+        ret_content += super(card_status, self).execute_plugin(
+            "atr", arg_connection, **kwargs)
+
+        ret_content += super(card_status, self).execute_plugin(
+            "dir", arg_connection, **kwargs)
+
+        return ret_content
