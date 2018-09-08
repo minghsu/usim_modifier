@@ -27,10 +27,8 @@ class card_status(base_plugin):
 
         ret_content = ""
 
+        # add which plugins will be execute
         ret_content += super(card_status, self).execute_plugin(
             "atr", arg_connection, **kwargs)
-
-        ret_content += super(card_status, self).execute_plugin(
-            "dir", arg_connection, **kwargs)
 
         return ret_content

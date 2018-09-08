@@ -3,6 +3,7 @@
   <!-- common string resource -->
   <string name="app_name">USIM modifier Version %d.%d for Python 3, (C)2018 Hsu Chih-Ming</string>
   <string name="list_card_id">ID</string>
+  <string name="console_prefix">USIM modifier [%s]> </string>
 
   <!-- en_US -->
   <string name="not_defined">This string was not defined</string>
@@ -12,4 +13,6 @@
   <string name="card_reader_connecting">Connecting to "%s" card reader ...</string>
   <string name="card_is_absent">Error!! Can't detetced the smart card.</string>
   <string name="unknow_error">Error! Can't identify problem!</string>
+  <string name="welcome_message">Already connected to smart card reader, please type 'help' command for help.</string>  
+  <string name="console_none">none</string>
 </resource>

@@ -11,3 +11,4 @@ class STATE(Enum):
     SCAN = 2                # Scan Readers
     INITIAL = 3             # Connect to card reader and do some initial procedure
     READER = 4              # Select which card reader will use
+    COMMAND = 5             # Get command

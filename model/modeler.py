@@ -30,8 +30,6 @@ class modeler:
 
         if ret == ERROR.ERR_NONE:
             self.__plugins_center = plugins_center(self.__connection)
-            print("DEBUG: START")
-            print(self.__plugins_center.auto_execute())
-            print("DEBUG: END")
+            return self.__plugins_center.auto_execute()
 
         return ret

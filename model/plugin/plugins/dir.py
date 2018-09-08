@@ -38,10 +38,13 @@ class dir(base_plugin):
             if sw1 == 0x90:
                 record_count = get_record_count(response)
                 data_length = get_data_length(response)
-                response, sw1, sw2 = arg_connection.read_record(
-                    record_count, data_length)
 
-                ret_content = "#%d - %s\n" % (
-                    record_count, toHexString(response))
+                for i in range(record_count):
+                    response, sw1, sw2 = arg_connection.read_record(
+                        i+1, data_length)
+
+                    if sw1 == 0x90:
+                        ret_content += "#%d - %s\n" % (
+                            i+1, toHexString(response))
 
         return ret_content

@@ -9,6 +9,7 @@ from model.modeler import modeler
 from utility.switch import switch
 from constant.state import STATE
 from constant.error import ERROR
+from view.consoles import consoles
 
 import view.layout as layout
 
@@ -18,6 +19,9 @@ class controller:
         self.__logging = logging.getLogger(os.path.basename(__file__))
         self.__resource = resource()
         self.__modeler = modeler()
+        self.__consoles = consoles(
+            self.__resource.get_string("console_prefix"),
+            self.__resource.get_string("console_none"))
         self.__state = STATE.WELCOME
         self.__reader_idx = None
 
@@ -62,21 +66,29 @@ class controller:
             if case(STATE.INITIAL):
                 tmp_content = self.__resource.get_string("card_reader_connecting") % (
                     self.__modeler.get_cardreader(self.__reader_idx))
-                layout.print_layout(
-                    "LAYOUT_FORMAL", tmp_content)
+                layout.print_layout("LAYOUT_FORMAL", tmp_content)
 
                 err_code = self.__modeler.create_connection(
                     self.__reader_idx)
 
-                if err_code == ERROR.ERR_CARD_ABSENT:
+                # [Note] I'm not sure is good solution, may need to re-factor
+                if type(err_code) == str:
+                    layout.print_split_with_formal_layout(err_code)
                     layout.print_layout(
-                        "LAYOUT_ERROR", self.__resource.get_string(
-                            "card_is_absent"))
-                elif err_code != ERROR.ERR_NONE:
-                    layout.print_layout(
-                        "LAYOUT_ERROR", self.__resource.get_string(
-                            "unknow_error"))
-
-                self.__state = STATE.EXIT
+                        "LAYOUT_FORMAL", self.__resource.get_string("welcome_message"))
+                    self.__state = STATE.COMMAND
+                else:
+                    if err_code == ERROR.ERR_CARD_ABSENT:
+                        layout.print_layout(
+                            "LAYOUT_ERROR", self.__resource.get_string(
+                                "card_is_absent"))
+                    elif err_code != ERROR.ERR_NONE:
+                        layout.print_layout(
+                            "LAYOUT_ERROR", self.__resource.get_string(
+                                "unknow_error"))
+                    self.__state = STATE.EXIT
                 break
+            if case(STATE.COMMAND):
+                cmd = self.__consoles.get_command()
+                self.__state = STATE.EXIT
         return True

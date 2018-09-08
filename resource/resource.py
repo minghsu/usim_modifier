@@ -9,7 +9,7 @@ from lxml import etree
 
 DEF_RESOURCE_FATAL = "Can't found any resource files!!"
 
-DEF_MAIN_VER_NO = 1
+DEF_MAIN_VER_NO = 2
 DEF_MAJOR_VER_NO = 0
 
 

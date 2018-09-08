@@ -15,6 +15,16 @@ DICT_LAYOUT = {
 }
 
 
+def print_split_with_formal_layout(arg_content, arg_split="\n"):
+    split_list = arg_content.split("\n")
+    output_string = ""
+
+    for i in range(len(split_list)):
+        if len(split_list[i]) > 0:
+            output_string += DICT_LAYOUT["LAYOUT_FORMAL"] % split_list[i]
+    print(output_string)
+
+
 def print_layout(arg_key, *args):
     if arg_key in DICT_LAYOUT:
         print(DICT_LAYOUT[arg_key] % tuple(args))
