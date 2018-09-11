@@ -7,6 +7,7 @@
   <string name="card_reader_connecting">正在連接 [%s] 智慧卡讀卡機 ...</string>
   <string name="card_is_absent">錯誤! 智慧卡不存在!</string>
   <string name="unknow_error">錯誤! 發生無法辨試的問題!</string>
-  <string name="welcome_message">智慧卡讀卡機已連接, 請輸入 'help' 指令取得求助資訊</string>
-  <string name="console_none">未指定</string>
+  <string name="welcome_message">輸入 'exit' 離開, 或 'plugin' 取得支援的 plugin 相關資訊.</string>
+  <string name="console_none">未選擇</string>
+  <string name="invalid_command">不正確的命令或是參數!!</string>
 </resource>

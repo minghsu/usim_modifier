@@ -19,6 +19,12 @@ class modeler:
     def get_cardreader(self, arg_idx):
         return self.__cardreader.get_reader(arg_idx)
 
+    def get_plugins(self):
+        if self.__plugins_center != None:
+            return self.__plugins_center.get_plugin_list()
+
+        return None
+
     def create_connection(self, arg_idx):
         if (arg_idx >= self.__cardreader.get_count()):
             return ERROR.ERR_UNKNOWN
@@ -33,3 +39,11 @@ class modeler:
             return self.__plugins_center.auto_execute()
 
         return ret
+
+    def close_connection(self):
+        if self.__connection != None:
+            self.__connection.close()
+            self.__connection = None
+
+    def execute(self, arg_plugin, **kwargs):
+        return self.__plugins_center.execute(arg_plugin, **kwargs)

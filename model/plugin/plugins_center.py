@@ -30,6 +30,16 @@ class plugins_center:
         self.__plugins = sorted(
             self.__plugins, key=lambda sort_plugin: sort_plugin[plugin_column.COL_SORT_IDX.value])
 
+    def get_plugin_list(self):
+        return self.__plugins
+
+    def execute(self, arg_plugin, **kwargs):
+        plugin_class = __import__("model.plugin.plugins.%s" %
+                                  (arg_plugin), fromlist=[arg_plugin])
+        instance_class = getattr(plugin_class, arg_plugin)()
+
+        return instance_class.execute(self.__connection, **kwargs)
+
     def auto_execute(self):
         ret_content = ""
 

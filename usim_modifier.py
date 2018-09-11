@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 from datetime import datetime
-from controller.controller import controller
+from control.controller import controller
 
 import logging
 import os

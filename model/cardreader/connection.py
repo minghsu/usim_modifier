@@ -24,6 +24,10 @@ class connection():
                              toHexString(response), sw1, sw2)
         return (response, sw1, sw2)
 
+    def close(self):
+        self.__connection.disconnect()
+        self.__connection = None
+
     def open(self):
         self.__logging.debug("open() > %s" % (self.__reader))
         try:

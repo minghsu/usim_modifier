@@ -12,3 +12,6 @@ class STATE(Enum):
     INITIAL = 3             # Connect to card reader and do some initial procedure
     READER = 4              # Select which card reader will use
     COMMAND = 5             # Get command
+    PLUGIN = 6              # List all summary of supported pluigns
+    EXECUTE = 7             # Execute plugin
+    INVALID = 8             # Invalid command or arguments
