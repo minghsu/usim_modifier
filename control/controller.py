@@ -34,7 +34,7 @@ class controller:
                 self.__modeler.close_connection()
                 return False
             if case(STATE.WELCOME):
-                viewer.print_bold_layout(self.__resource.get_app_name())
+                viewer.print_bold_layout("\n" + self.__resource.get_app_name())
                 self.__state = STATE.SCAN
                 break
             if case(STATE.SCAN):
@@ -109,6 +109,8 @@ class controller:
                         tmp_content += "%-12s: %s\n" % (
                             plugin[plugin_column.COL_NAME.value], plugin[plugin_column.COL_SUMMARY.value])
 
+                    tmp_content += "\n%s" % (self.__resource.get_string(
+                        "plugin_help_indication"))
                     viewer.print_formal_layout(tmp_content)
                 self.__state = STATE.COMMAND
                 break
@@ -120,8 +122,8 @@ class controller:
                 if plugin_list != None:
                     for plugin in plugin_list:
                         if plugin[plugin_column.COL_NAME.value] == cmd_list[0]:
-                            viewer.print_formal_layout(
-                                self.__modeler.execute(cmd_list[0]))
+                            viewer.print_formal_layout("\n" +
+                                                       self.__modeler.execute(cmd_list[0], " ".join(cmd_list[1:])))
                             self.__state = STATE.COMMAND
 
                 break

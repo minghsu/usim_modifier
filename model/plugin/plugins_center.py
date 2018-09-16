@@ -33,12 +33,16 @@ class plugins_center:
     def get_plugin_list(self):
         return self.__plugins
 
-    def execute(self, arg_plugin, **kwargs):
+    def execute(self, arg_plugin, arg_parameter=None):
         plugin_class = __import__("model.plugin.plugins.%s" %
                                   (arg_plugin), fromlist=[arg_plugin])
         instance_class = getattr(plugin_class, arg_plugin)()
 
-        return instance_class.execute(self.__connection, **kwargs)
+        check_help_parameter = arg_parameter.lower().split(" ")
+        if "help" in check_help_parameter:
+            return instance_class.help()
+
+        return instance_class.execute(self.__connection, arg_parameter)
 
     def auto_execute(self):
         ret_content = ""

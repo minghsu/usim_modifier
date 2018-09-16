@@ -18,8 +18,8 @@ def print_split_line(arg_key, arg_content, arg_split="\n"):
         split_list = arg_content.split(arg_split)
 
         for i in range(len(split_list)):
-            if len(split_list[i]) > 0:
-                output_string += DICT_LAYOUT[arg_key] % split_list[i]
+            # if len(split_list[i]) > 0:
+            output_string += DICT_LAYOUT[arg_key] % split_list[i]
         print(output_string)
 
 

@@ -25,8 +25,9 @@ class connection():
         return (response, sw1, sw2)
 
     def close(self):
-        self.__connection.disconnect()
-        self.__connection = None
+        if self.__connection != None:
+            self.__connection.disconnect()
+            self.__connection = None
 
     def open(self):
         self.__logging.debug("open() > %s" % (self.__reader))
@@ -63,8 +64,14 @@ class connection():
     def verify(self):
         pass
 
-    def read_binary(self):
-        pass
+    def read_binary(self, arg_length):
+        self.__logging.debug(
+            "read_binary() > length: %d" % (arg_length))
+
+        apdu_cmd = self.__apdu_factory.read_binary(arg_length)
+        response, sw1, sw2 = self.__transmit(apdu_cmd)
+
+        return (response, sw1, sw2)
 
     def update_binary(self):
         pass

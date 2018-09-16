@@ -22,17 +22,17 @@ class base_plugin(abc.ABC):
     def sort_index(self):
         return 0xFFFF
 
-    def execute_plugin(self, arg_plugin_name, arg_connection, **kwargs):
+    def help(self):
+        return self.summary()
 
-        for k, v in kwargs.items():
-            print('Optional argument %s (*kwargs): %s' % (k, v))
+    def execute_plugin(self, arg_plugin_name, arg_connection, arg_parameter=None):
 
         ret_content = None
         try:
             plugin_class = __import__("model.plugin.plugins.%s" %
                                       (arg_plugin_name), fromlist=[arg_plugin_name])
             instance_class = getattr(plugin_class, arg_plugin_name)()
-            ret_content = instance_class.execute(arg_connection, **kwargs)
+            ret_content = instance_class.execute(arg_connection, arg_parameter)
         except:
             pass
 

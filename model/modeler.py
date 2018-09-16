@@ -45,5 +45,5 @@ class modeler:
             self.__connection.close()
             self.__connection = None
 
-    def execute(self, arg_plugin, **kwargs):
-        return self.__plugins_center.execute(arg_plugin, **kwargs)
+    def execute(self, arg_plugin, arg_parameter=None):
+        return self.__plugins_center.execute(arg_plugin, arg_parameter)

@@ -8,6 +8,7 @@ from enum import Enum, unique
 class FILE_ID(Enum):
     MF = "3F00"
     DIR = "2F00"
+    ICCID = "2FE2"
 
 
 @unique

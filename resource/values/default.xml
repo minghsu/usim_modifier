@@ -17,4 +17,5 @@
   <string name="welcome_message">Type 'exit' to exit, 'plugin' for summary of suppotred plugins.</string>  
   <string name="console_none">none</string>
   <string name="invalid_command">Invalid command or agruments!</string>
+  <string name="plugin_help_indication">Type '[plugin name] help' for more information about the plugin.</string>
 </resource>

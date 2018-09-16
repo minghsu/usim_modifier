@@ -10,4 +10,5 @@
   <string name="welcome_message">輸入 'exit' 離開, 或 'plugin' 取得支援的 plugin 相關資訊.</string>
   <string name="console_none">未選擇</string>
   <string name="invalid_command">不正確的命令或是參數!!</string>
+  <string name="plugin_help_indication">輸入 '[plugin name] help' 取得 plugin 的更多資訊</string>
 </resource>

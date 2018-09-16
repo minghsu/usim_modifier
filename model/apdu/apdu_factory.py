@@ -51,3 +51,15 @@ class apdu_factory:
         ret_cmd[4] = arg_length  # Length
 
         return ret_cmd
+
+    def read_binary(self, arg_length):
+        self.__logging.debug("READ BINARY")
+        ret_cmd = [0x00] * 5
+
+        ret_cmd[0] = 0x00  # CLA
+        ret_cmd[1] = 0xB0  # INS
+        ret_cmd[2] = 0x00  # arg_idx
+        ret_cmd[3] = 0x00  # P2
+        ret_cmd[4] = arg_length  # Length
+
+        return ret_cmd

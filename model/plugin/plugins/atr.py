@@ -19,7 +19,7 @@ class atr(base_plugin):
     def auto_execute(self):
         return False
 
-    def execute(self, arg_connection, **kwargs):
+    def execute(self, arg_connection, arg_parameter=None):
         self.__logging.debug("execute()")
 
-        return "ATR: " + toHexString(arg_connection.get_atr()) + "\n"
+        return "ATR: " + toHexString(arg_connection.get_atr())

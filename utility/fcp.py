@@ -2,10 +2,14 @@
 # -*- coding:utf-8 -*-
 from enum import Enum, unique
 
+TELPLATE_TAG = [
+    0x62,  # FCP
+    0x61,  # APPLICATIOn
+]
+
 
 @unique
 class TLV_TAG(Enum):
-    FCP_TEMPLATE = 0x62
     FILE_DESCRIPTOR = 0x82
     FILE_IDENTIFIER = 0x83
     DF_OR_AID_NAME = 0x84             # DF, AID
@@ -18,6 +22,8 @@ class TLV_TAG(Enum):
     TOTAL_FILE_SIZE = 0x81
     FILE_SIZE = 0x80
     SFI_IDENTIFIER = 0x88
+    APPLICATION_IDENTIFIER = 0x4F
+    APPLICATION_LABEL = 0x50
 
 
 class EF_FILE_TYPE(Enum):
@@ -122,7 +128,6 @@ def search_fcp_content(arg_bytes=[], arg_tag=None):
                     01]
 
         arg_tag -- Which TAG for search
-            - 0x62: FCP template tag 
             - 0x82: File Descriptor
             - 0x83: File Identifier
             - 0x84: DF name (AID)
@@ -133,6 +138,8 @@ def search_fcp_content(arg_bytes=[], arg_tag=None):
             - 0x81: Total file size
             - 0x80: File size
             - 0x88: Short File Identifier (SFI)
+            - 0x4F: Application Identifier
+            - 0x50: Applicaiton Label
 
       PS. Refer 'ETSI TS 102 221'
 
@@ -156,9 +163,9 @@ def search_fcp_content(arg_bytes=[], arg_tag=None):
     """
     ret_content = None
 
-    if len(arg_bytes) > 0 and arg_tag != None and arg_bytes[0] == TLV_TAG.FCP_TEMPLATE.value:
+    if len(arg_bytes) > 0 and arg_tag != None and arg_bytes[0] in TELPLATE_TAG:
 
-        if arg_tag == TLV_TAG.FCP_TEMPLATE.value:
+        if arg_tag in TELPLATE_TAG:
             return arg_bytes
         else:
             curr_ptr = arg_bytes[2:]
