@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import logging
-import os.path
+import os
 
 from smartcard.util import toBytes
 

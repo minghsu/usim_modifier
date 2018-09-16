@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import logging
-import os.path
+import os
 
 from smartcard.util import toHexString, toASCIIString, PACK
 
@@ -21,7 +21,7 @@ class eficcid(base_plugin):
 
     def help(self):
         return ("Usage:\n"
-                "  - eficcid: Display the value of ICCID\n"
+                "  - eficcid\n"
                 "  - eficcid [new value of iccid]\n"
                 "Example:\n"
                 "  Original: 89860009191190000108\n"
@@ -37,8 +37,9 @@ class eficcid(base_plugin):
         return False
 
     def execute(self, arg_connection, arg_parameter=None):
-        ret_content = ""
         self.__logging.debug("execute()")
+
+        ret_content = ""
 
         # select MF
         response, sw1, sw2 = arg_connection.select(

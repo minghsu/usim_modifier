@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 import logging
-import os.path
+import os
 
 from smartcard.Exceptions import NoCardException
 from smartcard.util import toHexString

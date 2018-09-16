@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import logging
-import os.path
+import os
 
 from smartcard.util import toHexString
 from model.plugin.plugins.base_plugin import base_plugin

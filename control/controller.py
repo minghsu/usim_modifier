@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import logging
-import os.path
+import os
 
 from resource.resource import resource
 from model.modeler import modeler
@@ -103,8 +103,9 @@ class controller:
                 break
             if case(STATE.PLUGIN):
                 plugin_list = self.__modeler.get_plugins()
+                tmp_content = ""
                 if plugin_list != None:
-                    tmp_content = ""
+                    tmp_content += "\n"
                     for plugin in plugin_list:
                         tmp_content += "%-12s: %s\n" % (
                             plugin[plugin_column.COL_NAME.value], plugin[plugin_column.COL_SUMMARY.value])

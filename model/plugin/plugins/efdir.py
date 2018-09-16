@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import logging
-import os.path
+import os
 
 from smartcard.util import toHexString, toASCIIString, PACK
 
@@ -23,8 +23,8 @@ class efdir(base_plugin):
         return False
 
     def execute(self, arg_connection, arg_parameter=None):
-        ret_content = ""
         self.__logging.debug("execute()")
+        ret_content = ""
 
         # select MF
         response, sw1, sw2 = arg_connection.select(

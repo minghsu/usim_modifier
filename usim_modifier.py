@@ -6,7 +6,7 @@ from control.controller import controller
 import logging
 import os
 
-DEF_LOG_FOLDER_NAME = "logfiles"
+DEF_LOG_FOLDER_NAME = "log_file"
 
 if __name__ == "__main__":
     if not os.path.exists(DEF_LOG_FOLDER_NAME):
