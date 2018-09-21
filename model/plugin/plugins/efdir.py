@@ -50,21 +50,21 @@ class efdir(base_plugin):
                         aid_identifier_content = search_fcp_content(
                             response, TLV_TAG.APPLICATION_IDENTIFIER.value)
 
-                        if len(aid_identifier_content) > 2:
+                        if aid_identifier_content != None and len(aid_identifier_content) > 2:
                             aid_identifier = toHexString(
                                 aid_identifier_content[2:], format=PACK)
 
                         aid_label_content = search_fcp_content(
                             response, TLV_TAG.APPLICATION_LABEL.value)
 
-                        if len(aid_label_content) > 2:
+                        if aid_label_content != None and len(aid_label_content) > 2:
                             aid_lable = toASCIIString(aid_label_content[2:])
 
                         if aid_lable == None:
-                            ret_content += "#%d - %s\n>>>> AID: %s" % (
+                            ret_content += "#%d - %s\n>>>> AID: %s\n" % (
                                 i+1, toHexString(response), aid_identifier)
                         else:
-                            ret_content += "#%d - %s\n>>>> AID: %s, Name: %s" % (
+                            ret_content += "#%d - %s\n>>>> AID: %s, Name: %s\n" % (
                                 i+1, toHexString(response), aid_identifier, aid_lable)
 
         return ret_content
