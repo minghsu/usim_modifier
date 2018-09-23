@@ -11,6 +11,7 @@ from constant.state import STATE
 from constant.error import ERROR
 from constant.plugin_column import plugin_column
 from view.consoles import consoles
+from constant.apdu import VERIFY_TYPE
 
 import view.viewer as viewer
 
@@ -23,7 +24,7 @@ class controller:
         self.__consoles = consoles(
             self.__resource.get_string("console_prefix"),
             self.__resource.get_string("console_none"))
-        self.__state = STATE.WELCOME
+        self.__state = STATE.STARTUP
         self.__reader_idx = None
         self.__cmd = None
 
@@ -33,9 +34,14 @@ class controller:
             if case(STATE.EXIT):
                 self.__modeler.close_connection()
                 return False
-            if case(STATE.WELCOME):
+            if case(STATE.STARTUP):
                 viewer.print_bold_layout("\n" + self.__resource.get_app_name())
                 self.__state = STATE.SCAN
+                break
+            if case(STATE.WELCOME):
+                viewer.print_bold_layout("\n" +
+                                         self.__resource.get_string("welcome_message"))
+                self.__state = STATE.COMMAND
                 break
             if case(STATE.SCAN):
                 if (self.__modeler.get_cardreader_count() == 1):
@@ -61,6 +67,27 @@ class controller:
             if case(STATE.READER):
                 self.__state = STATE.EXIT
                 break
+            if case(STATE.PIN1_VERIFY):
+                self.__state = STATE.ADM_VERIFY
+                break
+            if case(STATE.ADM_VERIFY):
+                adm_key = self.__consoles.get_adm_key(
+                    self.__resource.get_string("get_adm_key"))
+
+                self.__state = STATE.AUTO_EXECUTE
+
+                if len(adm_key) != 0:
+                    ret_err, count = self.__modeler.verify(
+                        VERIFY_TYPE.ADM1.value, adm_key)
+
+                    if ret_err == ERROR.ERR_VERIFY_FAIL:
+                        viewer.print_error_layout(self.__resource.get_string(
+                            "adm_verify_fail") % (count))
+                        self.__state = STATE.ADM_VERIFY
+                break
+            if case(STATE.AUTO_EXECUTE):
+                self.__state = STATE.WELCOME
+                break
             if case(STATE.INITIAL):
                 tmp_content = self.__resource.get_string("card_reader_connecting") % (
                     self.__modeler.get_cardreader(self.__reader_idx))
@@ -69,13 +96,8 @@ class controller:
                 err_code = self.__modeler.create_connection(
                     self.__reader_idx)
 
-                # [Note] I'm not sure is good solution or not, may need to re-factor
-                if type(err_code) == str:
-                    if len(err_code) > 0:
-                        viewer.print_formal_layout(err_code)
-                    viewer.print_formal_layout(
-                        self.__resource.get_string("welcome_message"))
-                    self.__state = STATE.COMMAND
+                if err_code == ERROR.ERR_NONE:
+                    self.__state = STATE.PIN1_VERIFY
                 else:
                     if err_code == ERROR.ERR_CARD_ABSENT:
                         viewer.print_error_layout(self.__resource.get_string(

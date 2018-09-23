@@ -11,4 +11,8 @@
   <string name="console_none">未選擇</string>
   <string name="invalid_command">不正確的命令或是參數!!</string>
   <string name="plugin_help_indication">輸入 '[plugin name] help' 取得 plugin 的更多資訊</string>
+  <string name="get_adm_key">請輸入 ADM Key (16 位數, 16進制), 敲擊 Enter 鍵可忽略驗證:</string>
+  <string name="get_pin1_code">請輸入 PIN1 Code (4 ~ 8 位數, 10進制), 敲擊 Enter 鍵可忽略驗證:</string>
+  <string name="pin1_verify_fail">PIN1 驗證失敗, 剩餘 %d 次</string>
+  <string name="adm_verify_fail">ADM Key 驗證失敗, 剩餘 %d 次</string>
 </resource>

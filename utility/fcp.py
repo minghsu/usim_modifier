@@ -38,8 +38,8 @@ def get_ef_file_type(arg_bytes=[]):
     Keyword arguments:
         arg_bytes -- a list of bytes to stringify
               e.g. [62 1E 82 05 42 21 00 20 01 83
-                    02 2F 00 A5 03 80 01 71 8A 01 
-                    05 8B 03 2F 06 01 80 02 00 20 
+                    02 2F 00 A5 03 80 01 71 8A 01
+                    05 8B 03 2F 06 01 80 02 00 20
                     88 00]
 
     Return values:
@@ -69,8 +69,8 @@ def get_record_count(arg_bytes=[]):
     Keyword arguments:
         arg_bytes -- a list of bytes to stringify
               e.g. [62 1E 82 05 42 21 00 20 01 83
-                    02 2F 00 A5 03 80 01 71 8A 01 
-                    05 8B 03 2F 06 01 80 02 00 20 
+                    02 2F 00 A5 03 80 01 71 8A 01
+                    05 8B 03 2F 06 01 80 02 00 20
                     88 00]
 
     Return values:
@@ -94,8 +94,8 @@ def get_data_length(arg_bytes=[]):
     Keyword arguments:
         arg_bytes -- a list of bytes to stringify
               e.g. [62 1E 82 05 42 21 00 20 01 83
-                    02 2F 00 A5 03 80 01 71 8A 01 
-                    05 8B 03 2F 06 01 80 02 00 20 
+                    02 2F 00 A5 03 80 01 71 8A 01
+                    05 8B 03 2F 06 01 80 02 00 20
                     88 00]
 
     Return values:
@@ -117,27 +117,53 @@ def get_data_length(arg_bytes=[]):
     return ret_data_length
 
 
+def get_pin1_status(arg_bytes=[]):
+    """Returns the PIN1 status
+
+    Keyword arguments:
+        arg_bytes - - Get response from MF
+              e.g. [62 1D 82 02 78 21 83 02 3F 00
+                    A5 03 80 01 71 8A 01 05 8B 03
+                    2F 06 01 C6 06 90 01 00 83 01
+                    01]
+
+    Return value:
+         True: PIN1 enabled
+        False: PIN1 disabled
+    """
+    ret_value = False
+
+    pin_status_template = search_fcp_content(
+        arg_bytes, TLV_TAG.PIN_STATUS_TEMPLATE_DO.value)
+
+    if pin_status_template != None:
+        if pin_status_template[4] == 0x80:
+            ret_value = True
+
+    return ret_value
+
+
 def search_fcp_content(arg_bytes=[], arg_tag=None):
     """Returns FCP content by TLV tag
 
     Keyword arguments:
-        arg_bytes -- a list of bytes to stringify
-              e.g. [62 1D 82 02 78 21 83 02 3F 00 
-                    A5 03 80 01 71 8A 01 05 8B 03 
-                    2F 06 01 C6 06 90 01 00 83 01 
+        arg_bytes - - a list of bytes to stringify
+              e.g. [62 1D 82 02 78 21 83 02 3F 00
+                    A5 03 80 01 71 8A 01 05 8B 03
+                    2F 06 01 C6 06 90 01 00 83 01
                     01]
 
-        arg_tag -- Which TAG for search
+        arg_tag - - Which TAG for search
             - 0x82: File Descriptor
             - 0x83: File Identifier
-            - 0x84: DF name (AID)
+            - 0x84: DF name(AID)
             - 0xA5: Proprietary information
             - 0x8A: Life Cycle Status Integer
             - 0x8B, 0x8C, 0xAB: Security attributes
             - 0xC6: PIN Status Template DO
             - 0x81: Total file size
             - 0x80: File size
-            - 0x88: Short File Identifier (SFI)
+            - 0x88: Short File Identifier(SFI)
             - 0x4F: Application Identifier
             - 0x50: Applicaiton Label
 

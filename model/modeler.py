@@ -36,7 +36,6 @@ class modeler:
 
         if ret == ERROR.ERR_NONE:
             self.__plugins_center = plugins_center(self.__connection)
-            return self.__plugins_center.auto_execute()
 
         return ret
 
@@ -47,3 +46,7 @@ class modeler:
 
     def execute(self, arg_plugin, arg_parameter=None):
         return self.__plugins_center.execute(arg_plugin, arg_parameter)
+
+    def verify(self, arg_type, arg_key):
+        if self.__connection != None:
+            return self.__connection.verify(arg_type, arg_key)

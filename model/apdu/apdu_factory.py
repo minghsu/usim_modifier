@@ -63,3 +63,17 @@ class apdu_factory:
         ret_cmd[4] = arg_length  # Length
 
         return ret_cmd
+
+    def verify(self, arg_verify_type, arg_verify_key):
+        self.__logging.debug("VERIFY")
+        ret_cmd = [0xFF] * (5 + 8)
+
+        ret_cmd[0] = 0x00  # CLA
+        ret_cmd[1] = 0x20  # INS
+        ret_cmd[2] = 0x00  # P1
+        ret_cmd[3] = arg_verify_type  # P2
+        ret_cmd[4] = 0x08  # Length
+        for i in range(len(arg_verify_key)):
+            ret_cmd[i+5] = arg_verify_key[i]
+
+        return ret_cmd

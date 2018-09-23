@@ -18,4 +18,8 @@
   <string name="console_none">none</string>
   <string name="invalid_command">Invalid command or agruments!</string>
   <string name="plugin_help_indication">Type '[plugin name] help' for more information about the plugin.</string>
+  <string name="get_adm_key">Please input ADM Key (16 digits, Hexadecimal), press ENTER key to skip:</string>
+  <string name="get_pin1_code">Please input PIN1 Code (4 ~ 8 digits, Decimal), press ENTER key to skip:</string>
+  <string name="pin1_verify_fail">PIN1 verify fail, remaining %d times</string>
+  <string name="adm_verify_fail">ADM Key verify fail, remaining %d times</string>
 </resource>
