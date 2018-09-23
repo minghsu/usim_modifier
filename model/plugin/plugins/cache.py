@@ -12,28 +12,26 @@ from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
 from utility.convert import BCDtoDecimalString
+from constant.security import DEF_SECURITY_CACHE_FOLDER
 
 
-DEF_SECURITY_XML_FOLDER = "security_cache"
-
-
-class security(base_plugin):
+class cache(base_plugin):
     def __init__(self):
         self.__logging = logging.getLogger(os.path.basename(__file__))
 
     def summary(self):
-        return "Store the PIN/ADM code to xml file for future verify automatically."
+        return "Cache the PIN1/ADM code to xml file for future verify automatically."
 
     def help(self):
         return ("Usage:\n"
-                " security pin=xxxxxxxx adm=xxxxxxxxxxxxxxxx\n"
-                "  - pin: 4 ~ 8 digits\n"
+                " security pin1=xxxxxxxx adm=xxxxxxxxxxxxxxxx\n"
+                "  - pin1: 4 ~ 8 digits\n"
                 "  - adm: 16 HEX digits\n"
                 "\n"
                 "Example:\n"
-                "  security pin=1234 adm=5555555555555555\n"
+                "  cache pin1=1234 adm=5555555555555555\n"
                 "\n"
-                " PS. The xml file name is base on ICCID of USIM.")
+                " PS. Using the ICCID as main file name.")
 
     @property
     def auto_execute(self):
@@ -42,8 +40,8 @@ class security(base_plugin):
     def execute(self, arg_connection, arg_parameter=None):
         self.__logging.debug("execute()")
 
-        if not os.path.exists(DEF_SECURITY_XML_FOLDER):
-            os.makedirs(DEF_SECURITY_XML_FOLDER)
+        if not os.path.exists(DEF_SECURITY_CACHE_FOLDER):
+            os.makedirs(DEF_SECURITY_CACHE_FOLDER)
 
         ret_content = "Unexpected error!!"
 
@@ -52,16 +50,16 @@ class security(base_plugin):
         key_list = arg_parameter.split(" ")
         for key in key_list:
             value = key.split("=")
-            if value[0] == "adm":
+            if value[0].lower() == "adm":
                 adm_code = value[1]
-            elif value[0] == "pin":
+            elif value[0].lower() == "pin1":
                 pin_code = value[1]
 
         if (adm_code == None or
             pin_code == None or
             len(adm_code) != 16 or
                 len(pin_code) < 4 or len(pin_code) > 8):
-            ret_content = "Invalid PIN/ADM code, operation terminated!!"
+            ret_content = "Invalid PIN1/ADM code, operation terminated!!"
         else:
             # select MF
             response, sw1, sw2 = arg_connection.select(
@@ -83,10 +81,10 @@ class security(base_plugin):
                         security_node = etree.Element("security")
                         adm_node = etree.SubElement(security_node, "adm")
                         adm_node.text = adm_code
-                        pin_node = etree.SubElement(security_node, "pin")
+                        pin_node = etree.SubElement(security_node, "pin1")
                         pin_node.text = pin_code
                         xmltree = etree.ElementTree(security_node)
-                        xmltree.write(DEF_SECURITY_XML_FOLDER + os.sep + iccid + ".xml", pretty_print=True,
+                        xmltree.write(DEF_SECURITY_CACHE_FOLDER + os.sep + iccid + ".xml", pretty_print=True,
                                       xml_declaration=True, encoding='utf-8')
                         ret_content = "The " + iccid + ".xml file stored success."
                     except:

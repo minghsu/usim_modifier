@@ -50,3 +50,22 @@ class modeler:
     def verify(self, arg_type, arg_key):
         if self.__connection != None:
             return self.__connection.verify(arg_type, arg_key)
+
+    def get_pin1_enabled(self):
+        return self.__connection.security.pin1_enabled
+    pin1_enabled = property(get_pin1_enabled)
+
+    def get_pin1_verified(self):
+        return self.__connection.security.pin1_verified
+
+    def set_pin1_verified(self, arg_pin1_verified):
+        self.__connection.security.pin1_verified = arg_pin1_verified
+    pin1_verified = property(get_pin1_verified, set_pin1_verified)
+
+    def get_adm_verified(self):
+        return self.__connection.security.adm_verified
+
+    def set_adm_verified(self, arg_adm_verified):
+        self.__connection.security.adm_verified = arg_adm_verified
+
+    adm_verified = property(get_adm_verified, set_adm_verified)

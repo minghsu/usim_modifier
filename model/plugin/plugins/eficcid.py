@@ -40,6 +40,13 @@ class eficcid(base_plugin):
         self.__logging.debug("execute()")
 
         ret_content = ""
+        raw_format = False
+
+        key_list = arg_parameter.split(" ")
+        for key in key_list:
+            value = key.split("=")
+            if value[0].lower() == "format" and value[1].lower() == "raw":
+                raw_format = True
 
         # select MF
         response, sw1, sw2 = arg_connection.select(
@@ -54,6 +61,9 @@ class eficcid(base_plugin):
                 data_length = get_data_length(response)
                 response, sw1, sw2 = arg_connection.read_binary(data_length)
 
-                ret_content = "ICCID: " + BCDtoDecimalString(response)
+                if raw_format:
+                    ret_content = "ICCID: " + toHexString(response)
+                else:
+                    ret_content = "ICCID: " + BCDtoDecimalString(response)
 
         return ret_content

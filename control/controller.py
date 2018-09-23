@@ -11,7 +11,7 @@ from constant.state import STATE
 from constant.error import ERROR
 from constant.plugin_column import plugin_column
 from view.consoles import consoles
-from constant.apdu import VERIFY_TYPE
+from constant.security import VERIFY_TYPE
 
 import view.viewer as viewer
 
@@ -71,19 +71,21 @@ class controller:
                 self.__state = STATE.ADM_VERIFY
                 break
             if case(STATE.ADM_VERIFY):
-                adm_key = self.__consoles.get_adm_key(
-                    self.__resource.get_string("get_adm_key"))
-
                 self.__state = STATE.AUTO_EXECUTE
+                if self.__modeler.get_adm_verified() == False:
+                    adm_key = self.__consoles.get_adm_key(
+                        self.__resource.get_string("get_adm_key"))
 
-                if len(adm_key) != 0:
-                    ret_err, count = self.__modeler.verify(
-                        VERIFY_TYPE.ADM1.value, adm_key)
+                    if len(adm_key) != 0:
+                        ret_err, count = self.__modeler.verify(
+                            VERIFY_TYPE.ADM1.value, adm_key)
 
-                    if ret_err == ERROR.ERR_VERIFY_FAIL:
-                        viewer.print_error_layout(self.__resource.get_string(
-                            "adm_verify_fail") % (count))
-                        self.__state = STATE.ADM_VERIFY
+                        if ret_err == ERROR.ERR_VERIFY_FAIL:
+                            viewer.print_error_layout(self.__resource.get_string(
+                                "adm_verify_fail") % (count))
+                            self.__state = STATE.ADM_VERIFY
+                        else:
+                            self.__modeler.adm_verified = True
                 break
             if case(STATE.AUTO_EXECUTE):
                 self.__state = STATE.WELCOME

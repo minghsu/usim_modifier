@@ -12,13 +12,6 @@ class FILE_ID(Enum):
 
 
 @unique
-class VERIFY_TYPE(Enum):
-    PIN1 = 0x01
-    PIN2 = 0x02
-    ADM1 = 0x0A
-
-
-@unique
 class CODING_P1_SELECT(Enum):
     SEL_BY_FILE_ID = 0x00
     SEL_CHILD_DF = 0x01

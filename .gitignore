@@ -108,5 +108,5 @@ venv.bak/
 
 # customization
 log_file
-security_cache
+cache_file
 .DS_Store

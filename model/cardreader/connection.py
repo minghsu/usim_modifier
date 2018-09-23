@@ -9,8 +9,8 @@ from constant.error import ERROR
 from constant.apdu import CODING_P1_SELECT, CODING_P2_SELECT
 from model.apdu.apdu_factory import apdu_factory
 from model.cardreader.security import security
-from utility.fcp import TLV_TAG, get_pin1_status
-from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT, VERIFY_TYPE
+from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
+from constant.security import VERIFY_TYPE
 
 
 class connection():
@@ -18,7 +18,7 @@ class connection():
         self.__logging = logging.getLogger(os.path.basename(__file__))
         self.__reader = arg_reader
         self.__apdu_factory = apdu_factory()
-        self.__security = security()
+        self.security = None
         self.__connection = None
 
     def __transmit(self, arg_apdu_cmd):
@@ -28,16 +28,16 @@ class connection():
                              toHexString(response), sw1, sw2)
         return (response, sw1, sw2)
 
-    def __query_pin1_status(self):
-        ret_pin1_status = False
+    # def __query_pin1_status(self):
+    #     ret_pin1_status = False
 
-        response, sw1, sw2 = self.select(
-            FILE_ID.MF.value, arg_p2_coding=CODING_P2_SELECT.SEL_NO_DATA_RETURN.value)
+    #     response, sw1, sw2 = self.select(
+    #         FILE_ID.MF.value, arg_p2_coding=CODING_P2_SELECT.SEL_NO_DATA_RETURN.value)
 
-        if sw1 == 0x90:
-            ret_pin1_status = get_pin1_status(response)
+    #     if sw1 == 0x90:
+    #         ret_pin1_status = get_pin1_status(response)
 
-        return ret_pin1_status
+    #     return ret_pin1_status
 
     def close(self):
         if self.__connection != None:
@@ -54,18 +54,10 @@ class connection():
             self.__connection = None
             return ERROR.ERR_CARD_ABSENT
 
-        self.__security.pin1_enabled = self.__query_pin1_status()
+        # Initial PIN1/ADM status and auto verify with cache file
+        self.security = security(self)
 
         return ERROR.ERR_NONE
-
-    def get_pin1_enabled(self):
-        return self.__security.pin1_enabled
-
-    def get_pin1_verified(self):
-        return self.__security.pin1_verified
-
-    def get_adm_verified(self):
-        return self.__security.adm_verified
 
     def get_atr(self):
         self.__logging.debug("get_atr()")
@@ -95,10 +87,6 @@ class connection():
         response, sw1, sw2 = self.__transmit(apdu_cmd)
 
         if sw1 == 0x90:
-            if arg_verify_type == VERIFY_TYPE.PIN1.value:
-                self.__security.pin1_verified = True
-            elif arg_verify_type == VERIFY_TYPE.ADM1.value:
-                self.__security.adm_verified = True
             return (ERROR.ERR_NONE, 0)
 
         return (ERROR.ERR_VERIFY_FAIL, (sw2 & 0x0F))
