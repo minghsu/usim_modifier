@@ -38,7 +38,7 @@ class controller:
                 self.__state = STATE.SCAN
                 break
             if case(STATE.WELCOME):
-                viewer.print_error_layout(
+                viewer.print_bold_layout(
                     self.__resource.get_string("welcome_security") % (self.__modeler.get_pin1_enabled(),
                                                                       self.__modeler.get_pin1_verified(),
                                                                       self.__modeler.get_adm_verified()))
@@ -92,6 +92,7 @@ class controller:
                             self.__modeler.adm_verified = True
                 break
             if case(STATE.AUTO_EXECUTE):
+                viewer.print_formal_layout(self.__modeler.auto_execute())
                 self.__state = STATE.WELCOME
                 break
             if case(STATE.INITIAL):

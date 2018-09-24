@@ -19,11 +19,21 @@ class dir(base_plugin):
     def summary(self):
         return "Displayed all contents of EF_DIR file."
 
+    def help(self):
+        return ("Usage:\n"
+                "  - dir [format=raw]\n"
+                "\n"
+                "Example:\n"
+                "  - dir\n"
+                "    > #1 - AID: A0000000871002FF86FFFF89FFFFFFFF, Label: UniverSIM\n"
+                "  - dir format=raw\n"
+                "    > #1 - AID: 61 1D 4F 10 A0 00 00 00 87 10 02 FF 86 FF FF 89 FF FF FF FF 50 09 55 6E 69 76 65 72 53 49 4D FF")
+
     @property
     def auto_execute(self):
         return False
 
-    def execute(self, arg_connection, arg_parameter=None):
+    def execute(self, arg_connection, arg_parameter=""):
         self.__logging.debug("execute()")
         ret_content = ""
         raw_format = False
@@ -46,9 +56,11 @@ class dir(base_plugin):
                     i+1, data_length)
 
                 if sw1 == 0x90:
+                    if ret_content != "":
+                        ret_content += "\n"
 
                     if raw_format:
-                        ret_content += "#%d - AID: %s\n" % (
+                        ret_content += "EF_DIR #%d - %s" % (
                             i+1, toHexString(response))
                     else:
                         aid_identifier = None
@@ -68,14 +80,16 @@ class dir(base_plugin):
                             aid_lable = toASCIIString(
                                 aid_label_content[2:])
 
-                        if ret_content != "":
-                            ret_content += "\n"
-
-                        if aid_lable == None:
-                            ret_content += "#%d - AID: %s" % (
+                        if aid_identifier == None:
+                            ret_content += "EF_DIR #%d - Empty Content" % (i+1)
+                        elif aid_lable == None:
+                            ret_content += "EF_DIR #%d - AID: %s" % (
                                 i+1, aid_identifier)
                         else:
-                            ret_content += "#%d - AID: %s, Label: %s" % (
+                            ret_content += "EF_DIR #%d - AID: %s, Label: %s" % (
                                 i+1, aid_identifier, aid_lable)
+
+        if ret_content == "":
+            ret_content = "Can't read the content from EF_DIR!"
 
         return ret_content

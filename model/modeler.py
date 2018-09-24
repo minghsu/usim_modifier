@@ -44,8 +44,11 @@ class modeler:
             self.__connection.close()
             self.__connection = None
 
-    def execute(self, arg_plugin, arg_parameter=None):
+    def execute(self, arg_plugin, arg_parameter=""):
         return self.__plugins_center.execute(arg_plugin, arg_parameter)
+
+    def auto_execute(self):
+        return self.__plugins_center.auto_execute()
 
     def verify(self, arg_type, arg_key):
         if self.__connection != None:
@@ -67,5 +70,4 @@ class modeler:
 
     def set_adm_verified(self, arg_adm_verified):
         self.__connection.security.adm_verified = arg_adm_verified
-
     adm_verified = property(get_adm_verified, set_adm_verified)

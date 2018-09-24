@@ -10,6 +10,10 @@ class FILE_ID(Enum):
     DIR = "2F00"
     ICCID = "2FE2"
     IMSI = "6F07"
+    AD = "6FAD"
+    GID1 = "6F3E"
+    MSISDN = "6F40"
+    SPN = "6F46"
 
 
 @unique

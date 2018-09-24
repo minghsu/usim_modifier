@@ -22,25 +22,26 @@ class imsi(base_plugin):
 
     def help(self):
         return ("Usage:\n"
-                "  - imsi\n"
-                "  - imsi [new value of iccid]\n"
+                "  - imsi [set=imsi] [format=raw]\n"
                 "Example:\n"
-                "  Original: 89860009191190000108\n"
+                "  Original: 001010123456789\n"
                 "  - imsi\n"
-                "    > 89860009191190000108\n"
-                "  - imsi 1234\n"
-                "    > 12340009191190000108\n"
-                "  - imsi 12340009191190004321\n"
-                "    > 12340009191190004321")
+                "    > IMSI: 001010123456789\n"
+                "  - imsi format=raw\n"
+                "    > IMSI: 08 09 10 10 10 32 54 76 98\n"
+                "  - imsi set=12345\n"
+                "    > IMSI: 123450123456789\n"
+                "  - imsi 466979876543210\n"
+                "    > IMSI: 466979876543210")
 
     @property
     def auto_execute(self):
         return False
 
-    def execute(self, arg_connection, arg_parameter=None):
+    def execute(self, arg_connection, arg_parameter=""):
         self.__logging.debug("execute()")
 
-        ret_content = ""
+        ret_content = "Can't read the content from EF_IMSI!"
         raw_format = False
 
         key_list = arg_parameter.split(" ")

@@ -37,7 +37,7 @@ class cache(base_plugin):
     def auto_execute(self):
         return False
 
-    def execute(self, arg_connection, arg_parameter=None):
+    def execute(self, arg_connection, arg_parameter=""):
         self.__logging.debug("execute()")
 
         if not os.path.exists(DEF_SECURITY_CACHE_FOLDER):

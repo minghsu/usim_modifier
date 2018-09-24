@@ -33,7 +33,7 @@ class plugins_center:
     def get_plugin_list(self):
         return self.__plugins
 
-    def execute(self, arg_plugin, arg_parameter=None):
+    def execute(self, arg_plugin, arg_parameter=""):
         plugin_class = __import__("model.plugin.plugins.%s" %
                                   (arg_plugin), fromlist=[arg_plugin])
         instance_class = getattr(plugin_class, arg_plugin)()

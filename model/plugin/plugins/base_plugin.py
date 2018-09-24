@@ -25,7 +25,7 @@ class base_plugin(abc.ABC):
     def help(self):
         return self.summary()
 
-    def execute_plugin(self, arg_plugin_name, arg_connection, arg_parameter=None):
+    def execute_plugin(self, arg_plugin_name, arg_connection, arg_parameter=""):
 
         ret_content = None
         try:

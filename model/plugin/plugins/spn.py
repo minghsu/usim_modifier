@@ -9,33 +9,28 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from utility.convert import BCDtoDecimalString
-from model.plugin.select import eficcid
+from utility.convert import AlphaToString
+from model.plugin.select import efspn
 
 
-class iccid(base_plugin):
+class spn(base_plugin):
     def __init__(self):
         self.__logging = logging.getLogger(os.path.basename(__file__))
 
     def summary(self):
-        return "Display or modify the value of ICCID."
+        return "Display or modify the value of SPN."
 
     def help(self):
         return ("Usage:\n"
-                "  - iccid [set=iccid] [format=raw]\n"
+                "  - spn [set=XXXXXX] [format=raw]\n"
                 "\n"
                 "Example:\n"
-                "  Original: 89860009191190000108\n"
-                "  - iccid\n"
-                "    > ICCID: 89860009191190000108\n"
-                "  - iccid format=raw\n"
-                "    > ICCID: 98 68 00 90 91 11 09 00 10 80\n"
-                "  - iccid set=1234\n"
-                "    > ICCID: 12340009191190000108\n"
-                "  - iccid set=12340009191190004321\n"
-                "    > ICCID: 12340009191190004321\n"
-                "\n"
-                "PS. Suggest to verify ICCID  with Luhn algorithm by https://planetcalc.com/2464/ first")
+                "  - spn\n"
+                "    > SPN: MAI TEST (16)\n"
+                "  - spn format=raw\n"
+                "    > SPN: 01 4D 41 49 20 54 45 53 54 FF FF FF FF FF FF FF FF\n"
+                "  - spn set=Orange\n"
+                "    > SPN: Orange")
 
     @property
     def auto_execute(self):
@@ -44,7 +39,7 @@ class iccid(base_plugin):
     def execute(self, arg_connection, arg_parameter=""):
         self.__logging.debug("execute()")
 
-        ret_content = "Can't read the content from EF_ICCID!"
+        ret_content = "Can't read the content from EF_SPN!"
         raw_format = False
 
         key_list = arg_parameter.split(" ")
@@ -53,16 +48,17 @@ class iccid(base_plugin):
             if value[0].lower() == "format" and value[1].lower() == "raw":
                 raw_format = True
 
-        # select EF_ICCID
-        response, sw1, sw2 = eficcid(arg_connection)
+        # select EF_SPN
+        response, sw1, sw2 = efspn(arg_connection)
 
         if sw1 == 0x90:
             data_length = get_data_length(response)
             response, sw1, sw2 = arg_connection.read_binary(data_length)
 
             if raw_format:
-                ret_content = "ICCID: " + toHexString(response)
+                ret_content = "SPN: " + toHexString(response)
             else:
-                ret_content = "ICCID: " + BCDtoDecimalString(response)
+                ret_content = "SPN: %s (%d)" % (
+                    AlphaToString(response[1:]), len(response)-1)
 
         return ret_content

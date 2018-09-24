@@ -60,3 +60,43 @@ def efimsi(arg_connection):
             FILE_ID.IMSI.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
 
     return (response, sw1, sw2)
+
+
+def efad(arg_connection):
+    response, sw1, sw2 = adfusim(arg_connection)
+
+    if sw1 == 0x90:
+        response, sw1, sw2 = arg_connection.select(
+            FILE_ID.AD.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
+
+    return (response, sw1, sw2)
+
+
+def efgid1(arg_connection):
+    response, sw1, sw2 = adfusim(arg_connection)
+
+    if sw1 == 0x90:
+        response, sw1, sw2 = arg_connection.select(
+            FILE_ID.GID1.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
+
+    return (response, sw1, sw2)
+
+
+def efspn(arg_connection):
+    response, sw1, sw2 = adfusim(arg_connection)
+
+    if sw1 == 0x90:
+        response, sw1, sw2 = arg_connection.select(
+            FILE_ID.SPN.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
+
+    return (response, sw1, sw2)
+
+
+def efmsisdn(arg_connection):
+    response, sw1, sw2 = adfusim(arg_connection)
+
+    if sw1 == 0x90:
+        response, sw1, sw2 = arg_connection.select(
+            FILE_ID.MSISDN.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
+
+    return (response, sw1, sw2)
