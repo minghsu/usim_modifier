@@ -28,17 +28,6 @@ class connection():
                              toHexString(response), sw1, sw2)
         return (response, sw1, sw2)
 
-    # def __query_pin1_status(self):
-    #     ret_pin1_status = False
-
-    #     response, sw1, sw2 = self.select(
-    #         FILE_ID.MF.value, arg_p2_coding=CODING_P2_SELECT.SEL_NO_DATA_RETURN.value)
-
-    #     if sw1 == 0x90:
-    #         ret_pin1_status = get_pin1_status(response)
-
-    #     return ret_pin1_status
-
     def close(self):
         if self.__connection != None:
             self.__connection.disconnect()
