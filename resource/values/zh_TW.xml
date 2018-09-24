@@ -8,6 +8,7 @@
   <string name="card_is_absent">錯誤! 智慧卡不存在!</string>
   <string name="unknow_error">錯誤! 發生無法辨試的問題!</string>
   <string name="welcome_message">輸入 'exit' 離開, 或 'plugin' 取得支援的 plugin 相關資訊.</string>
+  <string name="welcome_security">PIN1 啟用: %s, PIN1 驗證: %s, ADM Key 驗證: %s</string>
   <string name="console_none">未選擇</string>
   <string name="invalid_command">不正確的命令或是參數!!</string>
   <string name="plugin_help_indication">輸入 '[plugin name] help' 取得 plugin 的更多資訊</string>

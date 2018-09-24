@@ -22,14 +22,13 @@ class controller:
         self.__resource = resource()
         self.__modeler = modeler()
         self.__consoles = consoles(
-            self.__resource.get_string("console_prefix"),
-            self.__resource.get_string("console_none"))
+            self.__resource.get_string("console_prefix"))
         self.__state = STATE.STARTUP
         self.__reader_idx = None
         self.__cmd = None
 
     def do_job(self):
-        # self.__logging.debug(self.__state)
+        self.__logging.debug(self.__state)
         for case in switch(self.__state):
             if case(STATE.EXIT):
                 self.__modeler.close_connection()
@@ -39,8 +38,13 @@ class controller:
                 self.__state = STATE.SCAN
                 break
             if case(STATE.WELCOME):
-                viewer.print_bold_layout("\n" +
-                                         self.__resource.get_string("welcome_message"))
+                viewer.print_error_layout(
+                    self.__resource.get_string("welcome_security") % (self.__modeler.get_pin1_enabled(),
+                                                                      self.__modeler.get_pin1_verified(),
+                                                                      self.__modeler.get_adm_verified()))
+
+                viewer.print_bold_layout(
+                    self.__resource.get_string("welcome_message"))
                 self.__state = STATE.COMMAND
                 break
             if case(STATE.SCAN):
@@ -75,7 +79,7 @@ class controller:
                 if self.__modeler.get_adm_verified() == False:
                     adm_key = self.__consoles.get_adm_key(
                         self.__resource.get_string("get_adm_key"))
-
+                    viewer.print_empty_line()
                     if len(adm_key) != 0:
                         ret_err, count = self.__modeler.verify(
                             VERIFY_TYPE.ADM1.value, adm_key)
@@ -110,7 +114,7 @@ class controller:
                     self.__state = STATE.EXIT
                 break
             if case(STATE.INVALID):
-                viewer.print_error_layout(self.__resource.get_string(
+                viewer.print_error_layout("\n" + self.__resource.get_string(
                     "invalid_command"))
                 self.__state = STATE.COMMAND
                 break

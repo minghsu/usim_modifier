@@ -3,7 +3,7 @@
   <!-- common string resource -->
   <string name="app_name">USIM modifier Version %d.%d for Python 3, (C)2018 Hsu Chih-Ming</string>
   <string name="list_card_id">ID</string>
-  <string name="console_prefix">USIM modifier [%s] > </string>
+  <string name="console_prefix">USIM modifier$ </string>
 
 
   <!-- en_US -->
@@ -15,6 +15,7 @@
   <string name="card_is_absent">Error!! Can't detetced the smart card.</string>
   <string name="unknow_error">Error! Can't identify problem!</string>
   <string name="welcome_message">Type 'exit' to exit, 'plugin' for summary of suppotred plugins.</string>  
+  <string name="welcome_security">PIN1 Enabled: %s, PIN1 Verified: %s, ADM Key Verified: %s</string>
   <string name="console_none">none</string>
   <string name="invalid_command">Invalid command or agruments!</string>
   <string name="plugin_help_indication">Type '[plugin name] help' for more information about the plugin.</string>

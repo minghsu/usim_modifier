@@ -5,13 +5,11 @@ from smartcard.util import toBytes, toASCIIBytes
 
 
 class consoles:
-    def __init__(self, arg_prefix, arg_selected):
+    def __init__(self, arg_prefix):
         self.__prefix = arg_prefix
-        self.__none_selected = arg_selected
-        self.__selected = self.__none_selected
 
     def get_command(self):
-        return input(self.__prefix % (self.__selected)).strip()
+        return input(self.__prefix).strip()
 
     def get_pin_code(self, arg_prefix_pin):
         return input(arg_prefix_pin).strip()
@@ -36,6 +34,3 @@ class consoles:
                     break
 
         return ret_adm_key
-
-    def get_selected(self):
-        return self.__selected

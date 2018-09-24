@@ -33,3 +33,7 @@ def print_error_layout(arg_content):
 
 def print_bold_layout(arg_content):
     print_split_line("LAYOUT_BOLD", arg_content)
+
+
+def print_empty_line():
+    print("")

@@ -34,28 +34,28 @@ class security:
 
     def __verify(self, arg_connection):
         self.__logging.debug("__verify")
-        # try:
-        xml = etree.parse(DEF_SECURITY_CACHE_FOLDER +
-                          os.sep + self.__iccid + ".xml")
-        security_root = xml.getroot()
 
-        pin1_node = security_root.xpath("pin1")
-        self.__pin1 = pin1_node[0].text
-        if self.__pin1_enabled:
-            ret_err, self.__pin1_retry = arg_connection.verify(
-                VERIFY_TYPE.PIN1.value, toASCIIBytes(self.__pin1))
+        try:
+            xml = etree.parse(DEF_SECURITY_CACHE_FOLDER +
+                              os.sep + self.__iccid + ".xml")
+            security_root = xml.getroot()
+
+            pin1_node = security_root.xpath("pin1")
+            self.__pin1 = pin1_node[0].text
+            if self.__pin1_enabled:
+                ret_err, self.__pin1_retry = arg_connection.verify(
+                    VERIFY_TYPE.PIN1.value, toASCIIBytes(self.__pin1))
+                if ret_err == ERROR.ERR_NONE:
+                    self.__pin1_verified = True
+
+            adm_node = security_root.xpath("adm")
+            self.__adm = adm_node[0].text
+            ret_err, self.__adm_retry = arg_connection.verify(
+                VERIFY_TYPE.ADM1.value, toBytes(self.__adm))
             if ret_err == ERROR.ERR_NONE:
-                self.__pin1_verified = True
-
-        adm_node = security_root.xpath("adm")
-        self.__adm = adm_node[0].text
-        ret_err, self.__adm_retry = arg_connection.verify(
-            VERIFY_TYPE.ADM1.value, toBytes(self.__adm))
-        if ret_err == ERROR.ERR_NONE:
-            self.__adm_verified = True
-
-        # except:
-        #    pass
+                self.__adm_verified = True
+        except:
+            pass
 
     def __query_pin1_status(self, arg_connection):
         self.__logging.debug("__query_pin1_status")

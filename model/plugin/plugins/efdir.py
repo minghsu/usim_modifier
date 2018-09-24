@@ -73,11 +73,14 @@ class efdir(base_plugin):
                                 aid_lable = toASCIIString(
                                     aid_label_content[2:])
 
+                            if ret_content != "":
+                                ret_content += "\n"
+
                             if aid_lable == None:
-                                ret_content += "#%d - AID: %s\n" % (
+                                ret_content += "#%d - AID: %s" % (
                                     i+1, aid_identifier)
                             else:
-                                ret_content += "#%d - AID: %s, Label: %s\n" % (
+                                ret_content += "#%d - AID: %s, Label: %s" % (
                                     i+1, aid_identifier, aid_lable)
 
         return ret_content
