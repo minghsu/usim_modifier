@@ -9,7 +9,7 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from utility.convert import AlphaToString
+from utility.convert import convert_alpha_to_string, convert_dialing_number_to_string
 from model.plugin.select import efmsisdn
 
 
@@ -67,13 +67,19 @@ class msisdn(base_plugin):
                         ret_content += "EF_MSISDN #%d - %s" % (
                             i+1, toHexString(response))
                     else:
-                        alpha_str = AlphaToString(response[:len(response)-14])
+                        alpha_str = convert_alpha_to_string(
+                            response[:len(response)-14])
+                        number_str = convert_dialing_number_to_string(
+                            response[len(response)-14+1:len(response)-14+1+11])
+
                         if alpha_str == "":
-                            ret_content += "EF_MSISDN #%d: Empry Content (%d)" % (
-                                i+1, len(response)-14)
-                        else:
-                            ret_content += "EF_MSISDN #%d: %s (%d)" % (
-                                i+1, alpha_str, len(response)-14)
+                            alpha_str = "[Empty Content]"
+
+                        if number_str == "":
+                            number_str = "[Empty Content]"
+
+                        ret_content += "EF_MSISDN #%d - Name: %s (%d), Number: %s" % (
+                            i+1, alpha_str, len(response)-14, number_str)
 
         if ret_content == "":
             ret_content = "Can't read the content from EF_MSISDN!"

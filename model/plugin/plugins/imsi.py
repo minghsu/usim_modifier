@@ -9,7 +9,7 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from utility.convert import BCDtoDecimalString
+from utility.convert import convert_bcd_to_string
 from model.plugin.select import efimsi
 
 
@@ -60,6 +60,7 @@ class imsi(base_plugin):
             if raw_format:
                 ret_content = "IMSI: " + toHexString(response)
             else:
-                ret_content = "IMSI: " + BCDtoDecimalString(response[1:])[1:]
+                ret_content = "IMSI: " + \
+                    convert_bcd_to_string(response[1:])[1:]
 
         return ret_content

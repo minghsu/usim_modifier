@@ -52,6 +52,7 @@ class gid1(base_plugin):
             data_length = get_data_length(response)
             response, sw1, sw2 = arg_connection.read_binary(data_length)
 
-            ret_content = "GID1: " + toHexString(response)
+            ret_content = "GID1: %s (%d)" % (
+                toHexString(response), data_length)
 
         return ret_content

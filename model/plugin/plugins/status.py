@@ -31,7 +31,5 @@ class status(base_plugin):
                         super(status, self).execute_plugin("gid1", arg_connection))
         ret_content += ("\n" +
                         super(status, self).execute_plugin("spn", arg_connection))
-        ret_content += ("\n" +
-                        super(status, self).execute_plugin("msisdn", arg_connection))
 
         return ret_content

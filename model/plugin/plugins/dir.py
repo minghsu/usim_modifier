@@ -81,7 +81,8 @@ class dir(base_plugin):
                                 aid_label_content[2:])
 
                         if aid_identifier == None:
-                            ret_content += "EF_DIR #%d - Empty Content" % (i+1)
+                            ret_content += "EF_DIR #%d - [Empty Content]" % (
+                                i+1)
                         elif aid_lable == None:
                             ret_content += "EF_DIR #%d - AID: %s" % (
                                 i+1, aid_identifier)

@@ -28,6 +28,10 @@ class connection():
                              toHexString(response), sw1, sw2)
         return (response, sw1, sw2)
 
+    def send(self, arg_apdu_cmd):
+        self.__logging.debug("send() %s", toHexString(arg_apdu_cmd))
+        return self.__transmit(arg_apdu_cmd)
+
     def close(self):
         if self.__connection != None:
             self.__connection.disconnect()

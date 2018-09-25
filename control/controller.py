@@ -73,10 +73,24 @@ class controller:
                 break
             if case(STATE.PIN1_VERIFY):
                 self.__state = STATE.ADM_VERIFY
+                if self.__modeler.pin1_enabled == True and self.__modeler.pin1_verified == False:
+                    pin1_code = self.__consoles.get_pin_code(
+                        self.__resource.get_string("get_pin1_code"))
+                    viewer.print_empty_line()
+                    if len(pin1_code) != 0:
+                        ret_err, count = self.__modeler.verify(
+                            VERIFY_TYPE.PIN1.value, pin1_code)
+
+                        if ret_err == ERROR.ERR_VERIFY_FAIL:
+                            viewer.print_error_layout(self.__resource.get_string(
+                                "pin1_verify_fail") % (count))
+                            self.__state = STATE.PIN1_VERIFY
+                        else:
+                            self.__modeler.pin1_verified = True
                 break
             if case(STATE.ADM_VERIFY):
                 self.__state = STATE.AUTO_EXECUTE
-                if self.__modeler.get_adm_verified() == False:
+                if self.__modeler.adm_verified == False:
                     adm_key = self.__consoles.get_adm_key(
                         self.__resource.get_string("get_adm_key"))
                     viewer.print_empty_line()

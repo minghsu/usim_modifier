@@ -7,7 +7,7 @@ from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from constant.security import DEF_SECURITY_CACHE_FOLDER, VERIFY_TYPE
 from constant.error import ERROR
 from utility.fcp import TLV_TAG, get_pin1_status, get_data_length
-from utility.convert import BCDtoDecimalString
+from utility.convert import convert_bcd_to_string
 from lxml import etree
 from smartcard.util import toASCIIBytes, toBytes
 
@@ -74,7 +74,7 @@ class security:
         if sw1 == 0x90:
             data_length = get_data_length(response)
             response, sw1, sw2 = arg_connection.read_binary(data_length)
-            return BCDtoDecimalString(response)
+            return convert_bcd_to_string(response)
 
         return None
 

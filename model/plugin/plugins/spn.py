@@ -9,7 +9,7 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from utility.convert import AlphaToString
+from utility.convert import convert_alpha_to_string
 from model.plugin.select import efspn
 
 
@@ -59,6 +59,6 @@ class spn(base_plugin):
                 ret_content = "SPN: " + toHexString(response)
             else:
                 ret_content = "SPN: %s (%d)" % (
-                    AlphaToString(response[1:]), len(response)-1)
+                    convert_alpha_to_string(response[1:]), len(response)-1)
 
         return ret_content

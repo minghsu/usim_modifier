@@ -9,7 +9,7 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from utility.convert import BCDtoDecimalString
+from utility.convert import convert_bcd_to_string
 from model.plugin.select import efimsi, efad
 
 
@@ -64,8 +64,8 @@ class mccmnc(base_plugin):
                 data_length = get_data_length(response)
                 response, sw1, sw2 = arg_connection.read_binary(data_length)
                 if sw1 == 0x90:
-                    mcc = BCDtoDecimalString(response[1:])[1:4]
-                    mnc = BCDtoDecimalString(response[1:])[4:4+mnc_length]
-                    ret_content = "MCC: %s / MNC: %s" % (mcc, mnc)
+                    mcc = convert_bcd_to_string(response[1:])[1:4]
+                    mnc = convert_bcd_to_string(response[1:])[4:4+mnc_length]
+                    ret_content = "MCC/MNC: %s/%s" % (mcc, mnc)
 
         return ret_content

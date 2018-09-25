@@ -9,7 +9,7 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from utility.convert import BCDtoDecimalString
+from utility.convert import convert_bcd_to_string
 from model.plugin.select import eficcid
 
 
@@ -63,6 +63,6 @@ class iccid(base_plugin):
             if raw_format:
                 ret_content = "ICCID: " + toHexString(response)
             else:
-                ret_content = "ICCID: " + BCDtoDecimalString(response)
+                ret_content = "ICCID: " + convert_bcd_to_string(response)
 
         return ret_content
