@@ -22,15 +22,15 @@ class msisdn(base_plugin):
 
     def help(self):
         return ("Usage:\n"
-                "  - msdn [set=XXXXXX] [format=raw]\n"
+                "  - msdn [name=XXXXXX] [number=XXXXXX] [format=raw]\n"
                 "\n"
                 "Example:\n"
-                "  - spn\n"
-                "    > SPN: MAI TEST (16)\n"
-                "  - spn format=raw\n"
-                "    > SPN: 01 4D 41 49 20 54 45 53 54 FF FF FF FF FF FF FF FF\n"
-                "  - spn set=Orange\n"
-                "    > SPN: Orange")
+                "  - msisdn\n"
+                "   > EF_MSISDN #1 - Name: [Empty Content] (14), Number: 0928000000\n"
+                "  - msisdn format=raw\n"
+                "   > EF_MSISDN #1 - FF FF FF FF FF FF FF FF FF FF FF FF FF FF 06 81 90 82 00 00 00 FF FF FF FF FF FF FF\n"
+                "  - msisdn name=Orange number=+886919001122\n"
+                "   > EF_MSISDN #1 - Name: Orange (14), Number: +886919001122")
 
     @property
     def auto_execute(self):
