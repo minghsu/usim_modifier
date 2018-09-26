@@ -50,10 +50,11 @@ class cache(base_plugin):
         key_list = arg_parameter.split(" ")
         for key in key_list:
             value = key.split("=")
-            if value[0].lower() == "adm":
-                adm_code = value[1]
-            elif value[0].lower() == "pin1":
-                pin_code = value[1]
+            if len(value) == 2:
+                if value[0].lower() == "adm":
+                    adm_code = value[1]
+                elif value[0].lower() == "pin1":
+                    pin_code = value[1]
 
         if (adm_code == None or
             pin_code == None or

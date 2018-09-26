@@ -41,8 +41,9 @@ class dir(base_plugin):
         key_list = arg_parameter.split(" ")
         for key in key_list:
             value = key.split("=")
-            if value[0].lower() == "format" and value[1].lower() == "raw":
-                raw_format = True
+            if len(value) == 2:
+                if value[0].lower() == "format" and value[1].lower() == "raw":
+                    raw_format = True
 
         # select EF_DIR
         response, sw1, sw2 = efdir(arg_connection)

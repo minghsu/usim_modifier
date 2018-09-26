@@ -93,8 +93,14 @@ class connection():
 
         return (response, sw1, sw2)
 
-    def update_binary(self):
-        pass
+    def update_binary(self, arg_update_content):
+        self.__logging.debug(
+            "update_binary() > %s" % (toHexString(arg_update_content)))
+
+        apdu_cmd = self.__apdu_factory.update_binary(arg_update_content)
+        response, sw1, sw2 = self.__transmit(apdu_cmd)
+
+        return (response, sw1, sw2)
 
     def read_record(self, arg_idx, arg_length):
         self.__logging.debug(

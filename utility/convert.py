@@ -18,6 +18,29 @@ def convert_bcd_to_string(bytes=[]):
     return ret_content
 
 
+def convert_string_to_bcd(string=""):
+    """Convert the string to BCD array
+
+    >>> vals = "89860009191190000108"
+    >>> convert_string_to_bcd(vals)
+    [0x98, 0x68, 0x00, 0x90, 0x91, 0x11, 0x09, 0x00, 0x10, 0x80]
+    """
+    ret_len = int(len(string)/2) if (len(string) %
+                                     2) == 0 else int(len(string)/2+1)
+    ret_content = [0x00]*ret_len
+
+    for i in range(len(string)):
+        tmp = string[i*2:i*2+2]
+        if len(tmp) == 2:
+            ret_content[i] = (int(tmp[1]) * 16) + int(tmp[0])
+        elif len(tmp) == 1:
+            ret_content[i] = (ret_content[i] & 0xF0) + int(tmp[0])
+        else:
+            break
+
+    return ret_content
+
+
 def convert_alpha_to_string(bytes=[]):
     """Convert the bytes array of Alpha Identifier to string (Ex: ADN, EF_SPN)
 
