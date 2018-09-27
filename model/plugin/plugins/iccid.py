@@ -47,6 +47,7 @@ class iccid(base_plugin):
         ret_content = "Can't read the content from EF_ICCID!"
         raw_format = False
         update_iccid = False
+        set_content = ""
 
         key_list = arg_parameter.split(" ")
         for key in key_list:
