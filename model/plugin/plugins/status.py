@@ -14,6 +14,9 @@ class status(base_plugin):
     def summary(self):
         return "Displayed the current status of USIM."
 
+    def version(self):
+        return "1.00"
+
     @property
     def auto_execute(self):
         return True

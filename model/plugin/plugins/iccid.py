@@ -20,6 +20,9 @@ class iccid(base_plugin):
     def summary(self):
         return "Display or modify the value of ICCID."
 
+    def version(self):
+        return "1.00"
+
     def help(self):
         return ("Usage:\n"
                 "  - iccid [set=iccid] [format=raw]\n"

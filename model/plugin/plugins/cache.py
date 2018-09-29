@@ -22,6 +22,9 @@ class cache(base_plugin):
     def summary(self):
         return "Cache the PIN1/ADM code to xml file for future verify automatically."
 
+    def version(self):
+        return "1.00"
+
     def help(self):
         return ("Usage:\n"
                 " security pin1=xxxxxxxx adm=xxxxxxxxxxxxxxxx\n"

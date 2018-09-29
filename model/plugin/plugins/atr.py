@@ -15,6 +15,9 @@ class atr(base_plugin):
     def summary(self):
         return "Displayed the value of Answer To Reset (ATR)."
 
+    def version(self):
+        return "1.00"
+
     @property
     def auto_execute(self):
         return False

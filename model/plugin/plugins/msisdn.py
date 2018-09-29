@@ -20,6 +20,9 @@ class msisdn(base_plugin):
     def summary(self):
         return "Display or modify the value of MSISDN."
 
+    def version(self):
+        return "1.00"
+
     def help(self):
         return ("Usage:\n"
                 "  - msdn [name=XXXXXX] [number=XXXXXX] [format=raw]\n"

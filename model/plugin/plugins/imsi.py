@@ -20,6 +20,9 @@ class imsi(base_plugin):
     def summary(self):
         return "Display or modify the value of IMSI."
 
+    def version(self):
+        return "1.00"
+
     def help(self):
         return ("Usage:\n"
                 "  - imsi [set=imsi] [format=raw]\n"
@@ -63,34 +66,36 @@ class imsi(base_plugin):
             data_length = get_data_length(response)
             response, sw1, sw2 = arg_connection.read_binary(data_length)
 
-            if update_imsi:
-                """
-                IMSI RAW: 08 09 10 10 10 32 54 76 98
+            if sw1 == 0x90:
+                if update_imsi:
+                    imsi_update_content = response[:]
 
-                Original IMSI: 9001010123456789
-                SET IMSI: 46692
-                UPDATE IMSI: 9 + 46692 + 0123456789
-                """
-                original = convert_bcd_to_string(response[1:])
-                if len(set_content) >= 15:
-                    update_imsi = original[0:1] + set_content[:15]
-                else:
-                    update_imsi = (original[0:1] +
-                                   set_content + original[1+len(set_content):])
+                    for i in range(len(set_content)):
+                        if i == 15:
+                            break
+                        Idx_of_PayLoad = int(((i + 1) / 2) + 1)
+                        Mod_Value = (i % 2)
 
-                # 08 => lenght of IMSI
-                response, sw1, sw2 = arg_connection.update_binary([0x08] +
-                                                                  convert_string_to_bcd(update_imsi))
-                if sw1 == 0x90:
-                    ret_content = "IMSI: Updated to '%s'" % (update_imsi[1:])
-                else:
-                    ret_content = "Can't update the new content to EF_IMSI!"
+                        if Mod_Value == 0:
+                            imsi_update_content[Idx_of_PayLoad] = (
+                                imsi_update_content[Idx_of_PayLoad] & 0x0F) + (int(set_content[i]) << 4)
+                        else:
+                            imsi_update_content[Idx_of_PayLoad] = (
+                                imsi_update_content[Idx_of_PayLoad] & 0xF0) + int(set_content[i])
 
-            else:
-                if raw_format:
-                    ret_content = "IMSI: " + toHexString(response)
+                    response, sw1, sw2 = arg_connection.update_binary(
+                        imsi_update_content)
+                    if sw1 == 0x90:
+                        ret_content = ("IMSI: Updated to '" +
+                                       convert_bcd_to_string(imsi_update_content[1:])[1:] + ("'"))
+                    else:
+                        ret_content = "Can't update the new content to EF_IMSI!"
+
                 else:
-                    ret_content = "IMSI: " + \
-                        convert_bcd_to_string(response[1:])[1:]
+                    if raw_format:
+                        ret_content = "IMSI: " + toHexString(response)
+                    else:
+                        ret_content = ("IMSI: " +
+                                       convert_bcd_to_string(response[1:])[1:])
 
         return ret_content

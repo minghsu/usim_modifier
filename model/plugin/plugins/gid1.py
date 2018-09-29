@@ -19,6 +19,9 @@ class gid1(base_plugin):
     def summary(self):
         return "Display or modify the value of GID1."
 
+    def version(self):
+        return "1.00"
+
     def help(self):
         return ("Usage:\n"
                 "  - gid1 [set=xxxxxx]\n"

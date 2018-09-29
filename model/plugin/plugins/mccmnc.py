@@ -20,6 +20,9 @@ class mccmnc(base_plugin):
     def summary(self):
         return "Display or modify the value of MCC/MNC."
 
+    def version(self):
+        return "1.00"
+
     def help(self):
         return ("Usage:\n"
                 "  - mccmnc [mcc=xxx] [mnc=xxx]\n"
@@ -42,7 +45,7 @@ class mccmnc(base_plugin):
 
         ret_content = "Can't retrive the MCC/MNC value!"
         mnc_length = None
-        efad_raw_data = None
+        efad_data_response = None
 
         set_mcc = ""
         set_mnc = ""
@@ -72,7 +75,7 @@ class mccmnc(base_plugin):
             data_length = get_data_length(response)
             response, sw1, sw2 = arg_connection.read_binary(data_length)
             if sw1 == 0x90:
-                efad_raw_data = response[:]
+                efad_data_response = response[:]   # keep for update mnc length
                 mnc_length = response[3]
 
         # select EF_IMSI
@@ -108,9 +111,9 @@ class mccmnc(base_plugin):
                         update_imsi)
                     if sw1 == 0x90:
                         response, sw1, sw2 = efad(arg_connection)
-                        efad_raw_data[3] = len(set_mnc)
+                        efad_data_response[3] = len(set_mnc)
                         response, sw1, sw2 = arg_connection.update_binary(
-                            efad_raw_data)
+                            efad_data_response)
                         if sw1 == 0x90:
                             mcc = convert_bcd_to_string(update_imsi[1:])[1:4]
                             mnc = convert_bcd_to_string(update_imsi[1:])[

@@ -11,6 +11,10 @@ class base_plugin(abc.ABC):
         return NotImplemented
 
     @abc.abstractmethod
+    def version(self):
+        return NotImplemented
+
+    @abc.abstractmethod
     def execute(self, arg_connection):
         return NotImplemented
 

@@ -16,6 +16,9 @@ class send(base_plugin):
     def summary(self):
         return "Send the APDU command to USIM directly"
 
+    def version(self):
+        return "1.00"
+
     def help(self):
         return ("Usage:\n"
                 "  - send XXXXXX\n"

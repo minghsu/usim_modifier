@@ -20,6 +20,9 @@ class spn(base_plugin):
     def summary(self):
         return "Display or modify the value of SPN."
 
+    def version(self):
+        return "1.00"
+
     def help(self):
         return ("Usage:\n"
                 "  - spn [set=XXXXXX] [format=raw]\n"

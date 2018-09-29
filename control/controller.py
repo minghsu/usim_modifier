@@ -150,8 +150,10 @@ class controller:
                 if plugin_list != None:
                     tmp_content += "\n"
                     for plugin in plugin_list:
-                        tmp_content += "%-12s: %s\n" % (
-                            plugin[plugin_column.COL_NAME.value], plugin[plugin_column.COL_SUMMARY.value])
+                        tmp_content += "%12s %-4s > %s\n" % (
+                            plugin[plugin_column.COL_NAME.value],
+                            plugin[plugin_column.COL_VERSION.value],
+                            plugin[plugin_column.COL_SUMMARY.value])
 
                     tmp_content += "\n%s" % (self.__resource.get_string(
                         "plugin_help_indication"))

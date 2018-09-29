@@ -19,6 +19,9 @@ class dir(base_plugin):
     def summary(self):
         return "Displayed all contents of EF_DIR file."
 
+    def version(self):
+        return "1.00"
+
     def help(self):
         return ("Usage:\n"
                 "  - dir [format=raw]\n"
