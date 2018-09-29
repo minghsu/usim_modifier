@@ -52,6 +52,20 @@ class apdu_factory:
 
         return ret_cmd
 
+    def update_record(self, arg_idx, arg_update_record):
+        self.__logging.debug("UPDATE RECORD")
+        ret_cmd = [0x00] * 5
+
+        ret_cmd[0] = 0x00  # CLA
+        ret_cmd[1] = 0xDC  # INS
+        ret_cmd[2] = arg_idx  # P1
+        ret_cmd[3] = 0x04  # P2
+        ret_cmd[4] = len(arg_update_record)  # Length
+
+        ret_cmd += arg_update_record
+
+        return ret_cmd
+
     def read_binary(self, arg_length):
         self.__logging.debug("READ BINARY")
         ret_cmd = [0x00] * 5

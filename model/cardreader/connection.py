@@ -111,5 +111,12 @@ class connection():
 
         return (response, sw1, sw2)
 
-    def update_record(self):
-        pass
+    def update_record(self, arg_idx, arg_update_record):
+        self.__logging.debug(
+            "update_record() > no: %d, data: %s" % (arg_idx, toHexString(arg_update_record)))
+
+        apdu_cmd = self.__apdu_factory.update_record(
+            arg_idx, arg_update_record)
+        response, sw1, sw2 = self.__transmit(apdu_cmd)
+
+        return (response, sw1, sw2)
