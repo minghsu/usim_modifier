@@ -9,7 +9,7 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from utility.convert import convert_alpha_to_string
+from utility.convert import convert_alpha_to_string, convert_arguments_to_dict
 from model.plugin.select import efspn
 
 
@@ -47,15 +47,13 @@ class spn(base_plugin):
         update_spn = False
         set_content = ""
 
-        key_list = arg_parameter.split(" ")
-        for key in key_list:
-            value = key.split("=")
-            if len(value) == 2:
-                if value[0].lower() == "format" and value[1].lower() == "raw":
-                    raw_format = True
-                elif value[0].lower() == "set":
-                    set_content = value[1]
-                    update_spn = True
+        dict_args = convert_arguments_to_dict(arg_parameter)
+        for key, value in dict_args.items():
+            if key == "format" and value.lower() == "raw":
+                raw_format = True
+            elif key == "set":
+                set_content = value
+                update_spn = True
 
         # select EF_SPN
         response, sw1, sw2 = efspn(arg_connection)

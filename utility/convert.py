@@ -50,7 +50,15 @@ def convert_alpha_to_string(bytes=[]):
 
     Todo: Should consider the SMS default 7-bit & UCS2 coding
     """
-    return toASCIIString(bytes[:bytes.index(0xFF)])
+
+    ret_content = ""
+
+    try:
+        ret_content = toASCIIString(bytes[:bytes.index(0xFF)])
+    except ValueError:
+        ret_content = toASCIIString(bytes)
+
+    return ret_content
 
 
 def convert_dialing_number_to_string(bytes=[]):
@@ -65,3 +73,55 @@ def convert_dialing_number_to_string(bytes=[]):
         ret_number = "+" + ret_number
 
     return ret_number
+
+
+def convert_arguments_to_dict(arguments=""):
+    """Convert the argument to dict type
+
+    >>> vals = name="super star" num="+12345678"
+    >>> dict = { 'name': "super star",
+                 'num': "+12345678"}
+
+    """
+    ret_dict = {}
+
+    # Check the SPACE & EQ symbol position
+    space_pos = arguments.find(' ')
+    equal_pos = arguments.find('=')
+
+    if equal_pos == -1:
+        return ret_dict
+    if (space_pos < equal_pos) and space_pos != -1:
+        current_args = arguments[space_pos+1:]
+    else:
+        current_args = arguments[:]
+
+    while (current_args.find("=") != -1):
+        dict_value = None
+        dict_key = None
+
+        equal_pos = current_args.find('=')
+        dict_key = current_args[:equal_pos]
+        current_args = current_args[equal_pos+1:]
+        if current_args[0] == '"':
+            start_str_pos = 1
+            end_str_pos = current_args[1:].find('"')
+            if end_str_pos != -1:
+                dict_value = current_args[start_str_pos:end_str_pos+1]
+                current_args = current_args[end_str_pos+2:]
+            else:
+                break   # Can't found double quote sumbol, break
+        else:
+            start_str_pos = 0
+            end_str_pos = current_args.find(' ')
+            if end_str_pos != -1:
+                dict_value = current_args[start_str_pos:end_str_pos]
+                current_args = current_args[end_str_pos+1:]
+            else:
+                dict_value = current_args[start_str_pos:]
+                current_args = ""
+
+        if dict_key != None and dict_value != None:
+            ret_dict[dict_key.lower().strip()] = dict_value
+
+    return ret_dict

@@ -9,7 +9,7 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from utility.convert import convert_alpha_to_string, convert_dialing_number_to_string
+from utility.convert import convert_alpha_to_string, convert_dialing_number_to_string, convert_arguments_to_dict
 from model.plugin.select import efmsisdn
 
 
@@ -52,20 +52,18 @@ class msisdn(base_plugin):
         set_num_content = ""
         update_msisdn = False
 
-        key_list = arg_parameter.split(" ")
-        for key in key_list:
-            value = key.split("=")
-            if len(value) == 2:
-                if value[0].lower() == "format" and value[1].lower() == "raw":
-                    raw_format = True
-                elif value[0].lower() == "id":
-                    set_record_id = int(value[1])
-                elif value[0].lower() == "name":
-                    set_name_content = value[1]
-                    update_msisdn = True
-                elif value[0].lower() == "num":
-                    set_num_content = value[1]
-                    update_msisdn = True
+        dict_args = convert_arguments_to_dict(arg_parameter)
+        for key, value in dict_args.items():
+            if key == "format" and value.lower() == "raw":
+                raw_format = True
+            elif key == "id":
+                set_record_id = int(value)
+            elif key == "name":
+                set_name_content = value
+                update_msisdn = True
+            elif key == "num":
+                set_num_content = value
+                update_msisdn = True
 
         # select EF_MSISDN
         response, sw1, sw2 = efmsisdn(arg_connection)
@@ -111,8 +109,9 @@ class msisdn(base_plugin):
                                 update_msisdn_apdu[alpha_len] = 11
 
                             # TON NPI
-                            if set_num_content[0] == "+":
+                            if len(set_num_content) > 0 and set_num_content[0] == "+":
                                 update_msisdn_apdu[alpha_len+1] = 0x91
+                                set_num_content = set_num_content[1:]
                             else:
                                 update_msisdn_apdu[alpha_len+1] = 0x81
 
