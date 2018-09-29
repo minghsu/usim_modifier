@@ -10,6 +10,7 @@ from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
 from model.plugin.select import efdir
+from utility.convert import convert_arguments_to_dict
 
 
 class dir(base_plugin):
@@ -41,12 +42,10 @@ class dir(base_plugin):
         ret_content = ""
         raw_format = False
 
-        key_list = arg_parameter.split(" ")
-        for key in key_list:
-            value = key.split("=")
-            if len(value) == 2:
-                if value[0].lower() == "format" and value[1].lower() == "raw":
-                    raw_format = True
+        dict_args = convert_arguments_to_dict(arg_parameter)
+        for key, value in dict_args.items():
+            if key == "format" and value.lower() == "raw":
+                raw_format = True
 
         # select EF_DIR
         response, sw1, sw2 = efdir(arg_connection)

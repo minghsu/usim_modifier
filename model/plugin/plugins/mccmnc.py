@@ -9,7 +9,7 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from utility.convert import convert_bcd_to_string, convert_string_to_bcd
+from utility.convert import convert_bcd_to_string, convert_string_to_bcd, convert_arguments_to_dict
 from model.plugin.select import efimsi, efad
 
 
@@ -51,16 +51,14 @@ class mccmnc(base_plugin):
         set_mnc = ""
         update_mcc_mnc = False
 
-        key_list = arg_parameter.split(" ")
-        for key in key_list:
-            value = key.split("=")
-            if len(value) == 2:
-                if value[0].lower() == "mcc":
-                    set_mcc = value[1]
-                    update_mcc_mnc = True
-                elif value[0].lower() == "mnc":
-                    set_mnc = value[1]
-                    update_mcc_mnc = True
+        dict_args = convert_arguments_to_dict(arg_parameter)
+        for key, value in dict_args.items():
+            if key == "mcc":
+                set_mcc = value
+                update_mcc_mnc = True
+            elif key == "mnc":
+                set_mnc = value
+                update_mcc_mnc = True
 
         # Check the length of MCC/MNC
         if update_mcc_mnc:
@@ -111,7 +109,8 @@ class mccmnc(base_plugin):
                         update_imsi)
                     if sw1 == 0x90:
                         response, sw1, sw2 = efad(arg_connection)
-                        efad_data_response[3] = len(set_mnc)
+                        mnc_length = len(set_mnc)
+                        efad_data_response[3] = mnc_length
                         response, sw1, sw2 = arg_connection.update_binary(
                             efad_data_response)
                         if sw1 == 0x90:
