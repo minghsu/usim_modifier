@@ -34,7 +34,7 @@ class msisdn(base_plugin):
                 '   > EF_MSISDN #1 - FF FF FF FF FF FF FF FF FF FF FF FF FF FF 06 81 90 82 00 00 00 FF FF FF FF FF FF FF\n'
                 '  - msisdn id=1 name=Orange num=+886919001122\n'
                 '   > EF_MSISDN #1 - Name: Orange (14), Number: +886919001122\n'
-                '  - msisdn id=1 name=My Test SIM\n'
+                '  - msisdn id=1 name="My Test SIM"\n'
                 '   > EF_MSISDN #1 - Name: Orange (14), Number: +886919001122\n'
                 '\n'
                 'PS. For update MSISDN record, the "id" is a mandatory argument')
