@@ -24,18 +24,20 @@ class msisdn(base_plugin):
         return "1.00"
 
     def help(self):
-        return ("Usage:\n"
-                "  - msisdn [id=XX] [name=XXXXXX] [num=XXXXXX] [format=raw]\n"
-                "\n"
-                "Example:\n"
-                "  - msisdn\n"
-                "   > EF_MSISDN #1 - Name: [Empty Content] (14), Number: 0928000000\n"
-                "  - msisdn format=raw\n"
-                "   > EF_MSISDN #1 - FF FF FF FF FF FF FF FF FF FF FF FF FF FF 06 81 90 82 00 00 00 FF FF FF FF FF FF FF\n"
-                "  - msisdn id=1 name=Orange num=+886919001122\n"
-                "   > EF_MSISDN #1 - Name: Orange (14), Number: +886919001122\n"
-                "\n"
-                "PS. For update MSISDN record, the 'id' is a mandatory argument")
+        return ('Usage:\n'
+                '  - msisdn [id=XX] [name=XXXXXX] [num=XXXXXX] [format=raw]\n'
+                '\n'
+                'Example:\n'
+                '  - msisdn\n'
+                '   > EF_MSISDN #1 - Name: [Empty Content] (14), Number: 0928000000\n'
+                '  - msisdn format=raw\n'
+                '   > EF_MSISDN #1 - FF FF FF FF FF FF FF FF FF FF FF FF FF FF 06 81 90 82 00 00 00 FF FF FF FF FF FF FF\n'
+                '  - msisdn id=1 name=Orange num=+886919001122\n'
+                '   > EF_MSISDN #1 - Name: Orange (14), Number: +886919001122\n'
+                '  - msisdn id=1 name=My Test SIM\n'
+                '   > EF_MSISDN #1 - Name: Orange (14), Number: +886919001122\n'
+                '\n'
+                'PS. For update MSISDN record, the "id" is a mandatory argument')
 
     @property
     def auto_execute(self):

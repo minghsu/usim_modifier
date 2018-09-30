@@ -24,16 +24,18 @@ class spn(base_plugin):
         return "1.00"
 
     def help(self):
-        return ("Usage:\n"
-                "  - spn [set=XXXXXX] [format=raw]\n"
-                "\n"
-                "Example:\n"
-                "  - spn\n"
-                "    > SPN: MAI TEST (16)\n"
-                "  - spn format=raw\n"
-                "    > SPN: 01 4D 41 49 20 54 45 53 54 FF FF FF FF FF FF FF FF\n"
-                "  - spn set=Orange\n"
-                "    > SPN: Orange")
+        return ('Usage:\n'
+                '  - spn [set=XXXXXX] [format=raw]\n'
+                '\n'
+                'Example:\n'
+                '  - spn\n'
+                '    > SPN: MAI TEST (16)\n'
+                ' - spn format=raw\n'
+                '    > SPN: 01 4D 41 49 20 54 45 53 54 FF FF FF FF FF FF FF FF\n'
+                '  - spn set=Orange\n'
+                '    > SPN: Orange\n'
+                '  - spn set="My SIM"\n'
+                '    > SPN: My SIM')
 
     @property
     def auto_execute(self):

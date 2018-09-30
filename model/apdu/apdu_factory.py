@@ -80,7 +80,7 @@ class apdu_factory:
 
     def update_binary(self, arg_update_content):
         self.__logging.debug("UPDATE BINARY")
-        ret_cmd = [0x00] * (5 + len(arg_update_content))
+        ret_cmd = [0x00] * 5
 
         ret_cmd[0] = 0x00  # CLA
         ret_cmd[1] = 0xD6  # INS
@@ -88,8 +88,7 @@ class apdu_factory:
         ret_cmd[3] = 0x00  # P2
         ret_cmd[4] = len(arg_update_content)  # Length
 
-        for i in range(len(arg_update_content)):
-            ret_cmd[i+5] = arg_update_content[i]
+        ret_cmd += arg_update_content
 
         return ret_cmd
 
