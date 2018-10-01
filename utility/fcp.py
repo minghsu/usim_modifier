@@ -137,7 +137,7 @@ def get_pin1_status(arg_bytes=[]):
         arg_bytes, TLV_TAG.PIN_STATUS_TEMPLATE_DO.value)
 
     if pin_status_template != None:
-        if pin_status_template[4] == 0x80:
+        if pin_status_template[4] & 0x80 == 0x80:
             ret_value = True
 
     return ret_value
