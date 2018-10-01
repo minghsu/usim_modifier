@@ -14,6 +14,8 @@ class FILE_ID(Enum):
     GID1 = "6F3E"
     MSISDN = "6F40"
     SPN = "6F46"
+    MF_ARR = "2F06"
+    ADF_ARR = "6F06"
 
 
 @unique

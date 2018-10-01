@@ -12,6 +12,26 @@ def mf(arg_connection):
     return (response, sw1, sw2)
 
 
+def mf_efarr(arg_connection):
+    response, sw1, sw2 = mf(arg_connection)
+    if sw1 == 0x90:
+        # select EF_DIR
+        response, sw1, sw2 = arg_connection.select(
+            FILE_ID.MF_ARR.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_MF.value)
+
+    return (response, sw1, sw2)
+
+
+def adf_efarr(arg_connection):
+    response, sw1, sw2 = adfusim(arg_connection)
+    if sw1 == 0x90:
+        # select EF_DIR
+        response, sw1, sw2 = arg_connection.select(
+            FILE_ID.ADF_ARR.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
+
+    return (response, sw1, sw2)
+
+
 def efdir(arg_connection):
     response, sw1, sw2 = mf(arg_connection)
     if sw1 == 0x90:
