@@ -26,6 +26,11 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 > - status: Displayed ICCID, IMSI, MCC/MNC, SPN & GID1 values of USIM.
 
 ---
+## Pay Attention
+
+The "PIN1" check mechanism still can't works fine, please disabled PIN1 first before using this tool. 
+
+---
 ## Requirement Packages
 
 - [colorama](https://pypi.org/project/colorama/)
@@ -36,6 +41,10 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 ## Install "USIM modifier"
 
 git clone https://github.com/minghsu/usim_modifier.git
+
+---
+## Todo
+- Security attribute (1st priority)
 
 ---
 ## User Guide
