@@ -13,22 +13,19 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 - Flexible plugin mechanism
 - Logging supported
 - Already support below plugins:
-> - atr: Displayed the value of Answer To Reset (ATR).
-> - cache: Cache the PIN1/ADM code to xml file for future verify automatically.
-> - dir: Displayed all contents of EF_DIR file.
-> - gid1: Display or modify the value of GID1.
-> - iccid: Display or modify the value of ICCID.
-> - imsi: Display or modify the value of IMSI.
-> - mccmnc: Display or modify the value of MCC/MNC.
-> - msisdn: Display or modify the value of MSISDN.
-> - send: Send the APDU command to USIM directly
-> - spn: Display or modify the value of SPN.
-> - status: Displayed ICCID, IMSI, MCC/MNC, SPN & GID1 values of USIM.
+> - iccid 1.00 > Display or modify the value of ICCID.
+> - spn 1.00 > Display or modify the value of SPN.
+> - dir 1.00 > Displayed all contents of EF_DIR file.
+> - send 1.00 > Send the APDU command to USIM directly
+> - mccmnc 1.00 > Display or modify the value of MCC/MNC.
+> - atr 1.00 > Displayed the value of Answer To Reset (ATR).
+> - cache 1.00 > Cache the PIN1/ADM code to xml file for future verify automatically.
+> - arr 1.00 > Displayed all contents of EF_ARR file.
+> - gid1 1.00 > Display or modify the value of GID1.
+> - msisdn 1.00 > Display or modify the value of MSISDN.
+> - imsi 1.00 > Display or modify the value of IMSI.
+> - status 1.00 > Displayed the current status of USIM
 
----
-## Pay Attention
-
-The "PIN1" check mechanism still can't works fine, please disabled PIN1 first before using this tool. 
 
 ---
 ## Requirement Packages
