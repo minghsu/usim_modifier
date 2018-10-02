@@ -3,7 +3,7 @@
 ---
 ## Abstract
 
-This is my 2nd practice project with Python, and it's a flexible SIM tool to modify some SIM files.
+This is my 2nd practice project with Python, and it's a flexible SIM tool to modify some SIM files.  
 Yes, the tool is not a perfect tool for USIM modify, but I think its enough for most requirement.
 
 ---
@@ -52,3 +52,8 @@ Coming soon ...
 ## Tech Note
 
 Coming soon ...
+
+---
+## Reference
+- ETSI TS 102 221 - Smart Cards; UICC-Terminal interface; Physical and logical characteristics
+- ETSI TS 131 102 - UMTS; LTE;Characteristics of the Universal Subscriber Identity Module (USIM) application
