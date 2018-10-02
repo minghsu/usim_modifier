@@ -151,7 +151,7 @@ class msisdn(base_plugin):
                             ret_content += "\n"
 
                         if raw_format:
-                            ret_content += "EF_MSISDN #%d - %s" % (
+                            ret_content += "EF_MSISDN #%02d - %s" % (
                                 i+1, toHexString(response))
                         else:
                             alpha_str = convert_alpha_to_string(
@@ -165,7 +165,7 @@ class msisdn(base_plugin):
                             if number_str == "":
                                 number_str = "[Empty Content]"
 
-                            ret_content += "EF_MSISDN #%d - Name: %s (%d), Number: %s" % (
+                            ret_content += "EF_MSISDN #%02d - Name: %s (%d), Number: %s" % (
                                 i+1, alpha_str, len(response)-14, number_str)
 
         if ret_content == "":

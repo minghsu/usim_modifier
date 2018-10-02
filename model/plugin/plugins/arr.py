@@ -29,11 +29,11 @@ class arr(base_plugin):
                 "\n"
                 "Example:\n"
                 "  - arr type=mf\n"
-                "    EF_ARR #1 - 80 01 01 90 00 80 01 1A A4 06 83 01 0A 95 01 08 FF FF FF FF FF FF FF FF FF FF FF\n"
-                "    EF_ARR #2 - 80 01 01 90 00 80 01 02 A4 06 83 01 01 95 01 08 80 01 18 A4 06 83 01 0A 95 01 08\n"
+                "    MF #1 - 80 01 01 90 00 80 01 1A A4 06 83 01 0A 95 01 08 FF FF FF FF FF FF FF FF FF FF FF\n"
+                "    MF #2 - 80 01 01 90 00 80 01 02 A4 06 83 01 01 95 01 08 80 01 18 A4 06 83 01 0A 95 01 08\n"
                 "  - arr type=adf\n"
-                "    EF_ARR #1 - 80 01 01 90 00 80 01 1A A4 06 83 01 0A 95 01 08 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF\n"
-                "    EF_ARR #2 - 80 01 01 A4 06 83 01 01 95 01 08 80 01 1A A4 06 83 01 0A 95 01 08 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF")
+                "    ADF #1 - 80 01 01 90 00 80 01 1A A4 06 83 01 0A 95 01 08 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF\n"
+                "    ADF #2 - 80 01 01 A4 06 83 01 01 95 01 08 80 01 1A A4 06 83 01 0A 95 01 08 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF")
 
     @property
     def auto_execute(self):
@@ -67,8 +67,8 @@ class arr(base_plugin):
                     if ret_content != "":
                         ret_content += "\n"
 
-                    ret_content += "%s ARR #%d - %s" % (selected_arr.upper(),
-                                                        i+1, toHexString(response))
+                    ret_content += "%s ARR #%02d - %s" % (selected_arr.upper(),
+                                                          i+1, toHexString(response))
 
         if ret_content == "":
             ret_content = "Can't read the content from EF_ARR!"

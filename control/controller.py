@@ -87,6 +87,10 @@ class controller:
                             self.__state = STATE.PIN1_VERIFY
                         else:
                             self.__modeler.pin1_verified = True
+                    else:
+                        viewer.print_bold_layout(self.__resource.get_string(
+                            "pin1_verity_cancel"))
+                        self.__state = STATE.EXIT
                 break
             if case(STATE.ADM_VERIFY):
                 self.__state = STATE.AUTO_EXECUTE

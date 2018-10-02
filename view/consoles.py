@@ -15,6 +15,8 @@ class consoles:
         while (True):
             try:
                 pin1_code = input("  " + arg_prefix_pin + " ").strip()
+                if len(pin1_code) == 0:
+                    break
                 if len(pin1_code) >= 4 and len(pin1_code) <= 8:
                     is_valid = True
                     for i in range(len(pin1_code)):
