@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
+from constant.apdu import CODING_P1_SELECT, CODING_P2_SELECT
 from smartcard.util import toHexString, PACK
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
 from enum import Enum, unique
@@ -22,7 +22,7 @@ class USIM_FILE_ID(Enum):
 
 def mf(arg_connection):
     response, sw1, sw2 = arg_connection.select(
-        FILE_ID.MF.value, arg_p2_coding=CODING_P2_SELECT.SEL_NO_DATA_RETURN.value)
+        USIM_FILE_ID.MF.value, arg_p2_coding=CODING_P2_SELECT.SEL_RETURN_FCP.value)
 
     return (response, sw1, sw2)
 

@@ -5,20 +5,6 @@ from enum import Enum, unique
 
 
 @unique
-class FILE_ID(Enum):
-    MF = "3F00"
-    DIR = "2F00"
-    ICCID = "2FE2"
-    IMSI = "6F07"
-    AD = "6FAD"
-    GID1 = "6F3E"
-    MSISDN = "6F40"
-    SPN = "6F46"
-    MF_ARR = "2F06"
-    ADF_ARR = "6F06"
-
-
-@unique
 class CODING_P1_SELECT(Enum):
     SEL_BY_FILE_ID = 0x00
     SEL_CHILD_DF = 0x01

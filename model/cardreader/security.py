@@ -3,13 +3,14 @@
 import os
 import logging
 
-from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
+from constant.apdu import CODING_P1_SELECT, CODING_P2_SELECT
 from constant.security import DEF_SECURITY_CACHE_FOLDER, VERIFY_TYPE
 from constant.error import ERROR
 from utility.fcp import TLV_TAG, get_pin1_status, get_data_length
 from utility.convert import convert_bcd_to_string
 from lxml import etree
 from smartcard.util import toASCIIBytes, toBytes
+from model.plugin.select import mf, select_file_in_mf, USIM_FILE_ID
 
 
 class security:
@@ -60,7 +61,7 @@ class security:
     def __query_pin1_status(self, arg_connection):
         self.__logging.debug("__query_pin1_status")
         # select MF
-        response, sw1, sw2 = arg_connection.select(FILE_ID.MF.value)
+        response, sw1, sw2 = mf(arg_connection)
         if sw1 == 0x90:
             self.__pin1_enabled = get_pin1_status(response)
 
@@ -68,8 +69,8 @@ class security:
         self.__logging.debug("__get_iccid")
 
         # select EF_ICCID
-        response, sw1, sw2 = arg_connection.select(
-            FILE_ID.ICCID.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_MF.value)
+        response, sw1, sw2 = select_file_in_mf(
+            arg_connection, USIM_FILE_ID.ICCID.value)
 
         if sw1 == 0x90:
             data_length = get_data_length(response)
