@@ -10,7 +10,7 @@ from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
 from utility.convert import convert_alpha_to_string, convert_dialing_number_to_string, convert_arguments_to_dict
-from model.plugin.select import efmsisdn
+from model.plugin.select import select_file_in_adf, USIM_FILE_ID
 
 
 class msisdn(base_plugin):
@@ -68,7 +68,8 @@ class msisdn(base_plugin):
                 update_msisdn = True
 
         # select EF_MSISDN
-        response, sw1, sw2 = efmsisdn(arg_connection)
+        response, sw1, sw2 = select_file_in_adf(
+            arg_connection, USIM_FILE_ID.MSISDN.value)
 
         if sw1 == 0x90:
             record_count = get_record_count(response)

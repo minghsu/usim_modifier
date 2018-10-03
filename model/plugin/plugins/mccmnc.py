@@ -10,7 +10,7 @@ from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
 from utility.convert import convert_bcd_to_string, convert_string_to_bcd, convert_arguments_to_dict
-from model.plugin.select import efimsi, efad
+from model.plugin.select import select_file_in_adf, USIM_FILE_ID
 
 
 class mccmnc(base_plugin):
@@ -68,7 +68,8 @@ class mccmnc(base_plugin):
                 return "Invalid the length of MNC!"
 
         # select EF_AD to get the length of mnc
-        response, sw1, sw2 = efad(arg_connection)
+        response, sw1, sw2 = select_file_in_adf(
+            arg_connection, USIM_FILE_ID.AD.value)
         if sw1 == 0x90:
             data_length = get_data_length(response)
             response, sw1, sw2 = arg_connection.read_binary(data_length)
@@ -78,7 +79,8 @@ class mccmnc(base_plugin):
 
         # select EF_IMSI
         if mnc_length != None:
-            response, sw1, sw2 = efimsi(arg_connection)
+            response, sw1, sw2 = select_file_in_adf(
+                arg_connection, USIM_FILE_ID.IMSI.value)
             if sw1 == 0x90:
                 data_length = get_data_length(response)
                 response, sw1, sw2 = arg_connection.read_binary(data_length)
@@ -108,7 +110,8 @@ class mccmnc(base_plugin):
                     response, sw1, sw2 = arg_connection.update_binary(
                         update_imsi)
                     if sw1 == 0x90:
-                        response, sw1, sw2 = efad(arg_connection)
+                        response, sw1, sw2 = select_file_in_adf(
+                            arg_connection, USIM_FILE_ID.AD.value)
                         mnc_length = len(set_mnc)
                         efad_data_response[3] = mnc_length
                         response, sw1, sw2 = arg_connection.update_binary(

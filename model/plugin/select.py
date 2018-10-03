@@ -3,6 +3,21 @@
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from smartcard.util import toHexString, PACK
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
+from enum import Enum, unique
+
+
+@unique
+class USIM_FILE_ID(Enum):
+    MF = "3F00"
+    DIR = "2F00"
+    ICCID = "2FE2"
+    IMSI = "6F07"
+    AD = "6FAD"
+    GID1 = "6F3E"
+    MSISDN = "6F40"
+    SPN = "6F46"
+    MF_ARR = "2F06"
+    ADF_ARR = "6F06"
 
 
 def mf(arg_connection):
@@ -12,47 +27,9 @@ def mf(arg_connection):
     return (response, sw1, sw2)
 
 
-def mf_efarr(arg_connection):
-    response, sw1, sw2 = mf(arg_connection)
-    if sw1 == 0x90:
-        # select EF_DIR
-        response, sw1, sw2 = arg_connection.select(
-            FILE_ID.MF_ARR.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_MF.value)
-
-    return (response, sw1, sw2)
-
-
-def adf_efarr(arg_connection):
-    response, sw1, sw2 = adfusim(arg_connection)
-    if sw1 == 0x90:
-        # select EF_DIR
-        response, sw1, sw2 = arg_connection.select(
-            FILE_ID.ADF_ARR.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
-
-    return (response, sw1, sw2)
-
-
-def efdir(arg_connection):
-    response, sw1, sw2 = mf(arg_connection)
-    if sw1 == 0x90:
-        # select EF_DIR
-        response, sw1, sw2 = arg_connection.select(
-            FILE_ID.DIR.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_MF.value)
-
-    return (response, sw1, sw2)
-
-
-def eficcid(arg_connection):
-    response, sw1, sw2 = mf(arg_connection)
-    if sw1 == 0x90:
-        response, sw1, sw2 = arg_connection.select(
-            FILE_ID.ICCID.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_MF.value)
-
-    return (response, sw1, sw2)
-
-
 def adfusim(arg_connection):
-    response, sw1, sw2 = efdir(arg_connection)
+    response, sw1, sw2 = select_file_in_mf(
+        arg_connection, USIM_FILE_ID.DIR.value)
 
     if sw1 == 0x90:
         data_length = get_data_length(response)
@@ -72,51 +49,22 @@ def adfusim(arg_connection):
     return (response, sw1, sw2)
 
 
-def efimsi(arg_connection):
-    response, sw1, sw2 = adfusim(arg_connection)
+def select_file_in_mf(arg_connection, arg_file_id):
 
+    response, sw1, sw2 = mf(arg_connection)
     if sw1 == 0x90:
         response, sw1, sw2 = arg_connection.select(
-            FILE_ID.IMSI.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
+            arg_file_id, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_MF.value)
 
     return (response, sw1, sw2)
 
 
-def efad(arg_connection):
+def select_file_in_adf(arg_connection, arg_file_id):
+
     response, sw1, sw2 = adfusim(arg_connection)
 
     if sw1 == 0x90:
         response, sw1, sw2 = arg_connection.select(
-            FILE_ID.AD.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
-
-    return (response, sw1, sw2)
-
-
-def efgid1(arg_connection):
-    response, sw1, sw2 = adfusim(arg_connection)
-
-    if sw1 == 0x90:
-        response, sw1, sw2 = arg_connection.select(
-            FILE_ID.GID1.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
-
-    return (response, sw1, sw2)
-
-
-def efspn(arg_connection):
-    response, sw1, sw2 = adfusim(arg_connection)
-
-    if sw1 == 0x90:
-        response, sw1, sw2 = arg_connection.select(
-            FILE_ID.SPN.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
-
-    return (response, sw1, sw2)
-
-
-def efmsisdn(arg_connection):
-    response, sw1, sw2 = adfusim(arg_connection)
-
-    if sw1 == 0x90:
-        response, sw1, sw2 = arg_connection.select(
-            FILE_ID.MSISDN.value, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
+            arg_file_id, arg_p1_coding=CODING_P1_SELECT.SEL_FROM_DF.value)
 
     return (response, sw1, sw2)

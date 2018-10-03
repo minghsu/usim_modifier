@@ -10,7 +10,7 @@ from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
 from utility.convert import convert_alpha_to_string, convert_arguments_to_dict
-from model.plugin.select import efspn
+from model.plugin.select import select_file_in_adf, USIM_FILE_ID
 
 
 class spn(base_plugin):
@@ -58,7 +58,8 @@ class spn(base_plugin):
                 update_spn = True
 
         # select EF_SPN
-        response, sw1, sw2 = efspn(arg_connection)
+        response, sw1, sw2 = select_file_in_adf(
+            arg_connection, USIM_FILE_ID.SPN.value)
 
         if sw1 == 0x90:
             data_length = get_data_length(response)

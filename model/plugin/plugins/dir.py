@@ -9,7 +9,7 @@ from smartcard.util import toHexString, toASCIIString, PACK
 from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
-from model.plugin.select import efdir
+from model.plugin.select import select_file_in_mf, USIM_FILE_ID
 from utility.convert import convert_arguments_to_dict
 
 
@@ -48,7 +48,8 @@ class dir(base_plugin):
                 raw_format = True
 
         # select EF_DIR
-        response, sw1, sw2 = efdir(arg_connection)
+        response, sw1, sw2 = select_file_in_mf(
+            arg_connection, USIM_FILE_ID.DIR.value)
 
         if sw1 == 0x90:
             record_count = get_record_count(response)

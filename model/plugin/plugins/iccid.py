@@ -10,7 +10,7 @@ from model.plugin.plugins.base_plugin import base_plugin
 from constant.apdu import FILE_ID, CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
 from utility.convert import convert_bcd_to_string, convert_string_to_bcd, convert_arguments_to_dict
-from model.plugin.select import eficcid
+from model.plugin.select import select_file_in_mf, USIM_FILE_ID
 
 
 class iccid(base_plugin):
@@ -61,7 +61,8 @@ class iccid(base_plugin):
                 update_iccid = True
 
         # select EF_ICCID
-        response, sw1, sw2 = eficcid(arg_connection)
+        response, sw1, sw2 = select_file_in_mf(
+            arg_connection, USIM_FILE_ID.ICCID.value)
 
         if sw1 == 0x90:
             data_length = get_data_length(response)
