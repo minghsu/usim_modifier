@@ -26,7 +26,6 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 > - imsi 1.00 > Display or modify the value of IMSI.
 > - status 1.00 > Displayed the current status of USIM
 
-
 ---
 ## Requirement Packages
 
@@ -40,13 +39,32 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 git clone https://github.com/minghsu/usim_modifier.git
 
 ---
-## Todo
-- Security attribute (1st priority)
-
----
 ## User Guide
 
-Coming soon ...
+If you can see simlar message with below picture, it mean the system was works fine,  
+then you can type "exit" command to quit or "plugin" to get more information.  
+
+The system will request "PIN1" (if pin1 enabled) and "ADM" verify,  
+we can skip the "ADM" key verify operation, but some USIM files will not updatable.
+    
+![Start up](/docs/images/startup.png "Start up")
+
+After executed "plugin" command, will list all supported plugin name, version and summary.
+
+![Plugins](/docs/images/plugin.png "Plugins")
+
+We use "imsi" plugin as an example, you can use "help" parameter to find help info for each plugin.
+>> - imsi help: Displayed the help message of "imsi" plugin
+>> - imsi: Displayed the current "IMSI"
+>> - imsi format=raw: Show the raw data of "IMSI"
+>> - imsi set=46692: Update the IMSI value to "46692XXXXXXXXXX"
+
+![IMSI](/docs/images/imsi.png "IMSI")
+
+If we skipped the "ADM" verify operation, some USIM file will not update due to the security concern.  
+For more detail, please refer "ETSI TS 131 102" specification.
+
+![ERROR](/docs/images/update_fail.png "ERROR")
 
 ---
 ## Tech Note
