@@ -3,7 +3,6 @@
 import os
 import logging
 
-from constant.apdu import CODING_P1_SELECT, CODING_P2_SELECT
 from constant.security import DEF_SECURITY_CACHE_FOLDER, VERIFY_TYPE
 from constant.error import ERROR
 from utility.fcp import TLV_TAG, get_pin1_status, get_data_length

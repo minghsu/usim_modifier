@@ -14,6 +14,7 @@ class USIM_FILE_ID(Enum):
     IMSI = "6F07"
     AD = "6FAD"
     GID1 = "6F3E"
+    GID2 = "6F3F"
     MSISDN = "6F40"
     SPN = "6F46"
     MF_ARR = "2F06"

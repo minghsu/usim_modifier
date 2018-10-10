@@ -7,7 +7,6 @@ import os
 from smartcard.util import toHexString, toASCIIString, PACK
 
 from model.plugin.plugins.base_plugin import base_plugin
-from constant.apdu import CODING_P1_SELECT, CODING_P2_SELECT
 from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
 from utility.convert import convert_bcd_to_string, convert_string_to_bcd, convert_arguments_to_dict
 from model.plugin.select import select_file_in_mf, USIM_FILE_ID

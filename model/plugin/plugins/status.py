@@ -31,7 +31,7 @@ class status(base_plugin):
         ret_content += ("\n" +
                         super(status, self).execute_plugin("mccmnc", arg_connection))
         ret_content += ("\n" +
-                        super(status, self).execute_plugin("gid1", arg_connection))
+                        super(status, self).execute_plugin("gid", arg_connection))
         ret_content += ("\n" +
                         super(status, self).execute_plugin("spn", arg_connection))
 

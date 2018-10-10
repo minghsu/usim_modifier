@@ -9,7 +9,6 @@ from constant.error import ERROR
 from constant.apdu import CODING_P1_SELECT, CODING_P2_SELECT
 from model.apdu.apdu_factory import apdu_factory
 from model.cardreader.security import security
-from constant.apdu import CODING_P1_SELECT, CODING_P2_SELECT
 from constant.security import VERIFY_TYPE
 
 
