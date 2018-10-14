@@ -69,7 +69,12 @@ For more detail, please refer "ETSI TS 131 102" specification.
 ---
 ## Tech Note
 
-Coming soon ...
+Below image is the simple diagram of USIM modifier V2 project, my goal is using "MVC" pattern but looks it still have many problem (><).
+
+![Simple Diagram](/docs/images/simple-diagram.png "Simple Diagram")
+
+
+The other parts will be coming soon ...
 
 ---
 ## Reference
