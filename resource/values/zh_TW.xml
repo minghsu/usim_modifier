@@ -17,4 +17,8 @@
   <string name="pin1_verify_fail">PIN1 驗證失敗, 剩餘 %d 次</string>
   <string name="adm_verify_fail">ADM Key 驗證失敗, 剩餘 %d 次</string>
   <string name="pin1_verity_cancel">使用者取消 PIN1 驗證, 作業終止</string>
+  <string name="env_check_package">%10s 套件是否安裝: %s</string>
+  <string name="env_check_welcome_msg">USIM modifier 執行環境檢查程式 ...</string>
+  <string name="env_check_result_ok">檢查結果: 所有套件已安裝</string>
+  <string name="env_check_result_nok">檢查結果: 缺少部份套件</string>
 </resource>

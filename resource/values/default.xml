@@ -24,4 +24,8 @@
   <string name="pin1_verify_fail">PIN1 verify fail, remaining %d times</string>
   <string name="adm_verify_fail">ADM Key verify fail, remaining %d times</string>
   <string name="pin1_verity_cancel">User cancel the PIN1 verify, system terminated!</string>
+  <string name="env_check_package">%10s package installed: %s</string>
+  <string name="env_check_welcome_msg">USIM modifier environment checking ...</string>
+  <string name="env_check_result_ok">Result: All packages were installed</string>
+  <string name="env_check_result_nok">Result: Missed some mandatory package</string>
 </resource>

@@ -9,7 +9,7 @@ from lxml import etree
 from smartcard.util import toHexString, toASCIIString, PACK
 
 from model.plugin.plugins.base_plugin import base_plugin
-from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
+from utility.fcp import get_data_length, get_record_count
 from utility.convert import convert_bcd_to_string, convert_arguments_to_dict
 from constant.security import DEF_SECURITY_CACHE_FOLDER
 from model.plugin.select import select_file_in_mf, USIM_FILE_ID
