@@ -30,11 +30,11 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 ## Requirement Packages
 
 - [colorama](https://pypi.org/project/colorama/)
->> ming_hsu@ubuntu:~$ pip3 install colorama  
-- [pyscard](https://pyscard.sourceforge.io/)
->> ming_hsu@ubuntu:~$ sudo apt-get install swig  
->> ming_hsu@ubuntu:~$ sudo apt-get install libpcsclite-dev  
->> ming_hsu@ubuntu:~$ sudo pip3 install pyscard
+>> ming_hsu@ubuntu:/$ pip3 install colorama  
+- [pyscard](https://pyscard.sourceforge.io/)  
+>> ming_hsu@ubuntu:/$ sudo apt-get install swig  
+>> ming_hsu@ubuntu:/$ sudo apt-get install libpcsclite-dev  
+>> ming_hsu@ubuntu:/$ sudo pip3 install pyscard
 - [lxml](https://lxml.de/) (UBuntu install by default)
 
 ---
