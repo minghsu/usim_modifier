@@ -48,21 +48,23 @@ class mccmnc(base_plugin):
 
         set_mcc = ""
         set_mnc = ""
-        update_mcc_mnc = False
+        update_mcc = False
+        update_mnc = False
 
         dict_args = convert_arguments_to_dict(arg_parameter)
         for key, value in dict_args.items():
             if key == "mcc":
                 set_mcc = value
-                update_mcc_mnc = True
+                update_mcc = True
             elif key == "mnc":
                 set_mnc = value
-                update_mcc_mnc = True
+                update_mnc = True
 
         # Check the length of MCC/MNC
-        if update_mcc_mnc:
+        if update_mcc:
             if len(set_mcc) not in (0, 3):
                 return "Invalid the length of MCC!"
+        if update_mnc:
             if len(set_mnc) not in (0, 2, 3):
                 return "Invalid the length of MNC!"
 
@@ -84,11 +86,11 @@ class mccmnc(base_plugin):
                 data_length = get_data_length(response)
                 response, sw1, sw2 = arg_connection.read_binary(data_length)
 
-                if update_mcc_mnc:
+                if update_mcc or update_mnc:
                     update_imsi = response[:]
 
                     # MCC
-                    if (len(set_mcc) == 3):
+                    if update_mcc and (len(set_mcc) == 3):
                         update_imsi[1] = (
                             update_imsi[1] & 0x0F) + (int(set_mcc[0]) << 4)
                         update_imsi[2] = (
@@ -97,29 +99,33 @@ class mccmnc(base_plugin):
                             update_imsi[2] & 0x0F) + (int(set_mcc[2]) << 4)
 
                     # MNC
-                    if (len(set_mnc) >= 2):
+                    if update_mnc and (len(set_mnc) >= 2):
                         update_imsi[3] = (
                             update_imsi[3] & 0xF0) + (int(set_mnc[0]))
                         update_imsi[3] = (
                             update_imsi[3] & 0x0F) + (int(set_mnc[1]) << 4)
-                    if len(set_mnc) == 3:
-                        update_imsi[4] = (
-                            update_imsi[4] & 0xF0) + (int(set_mnc[2]))
+
+                        if len(set_mnc) == 3:
+                            update_imsi[4] = (
+                                update_imsi[4] & 0xF0) + (int(set_mnc[2]))
 
                     response, sw1, sw2 = arg_connection.update_binary(
                         update_imsi)
                     if sw1 == 0x90:
-                        response, sw1, sw2 = select_file_in_adf(
-                            arg_connection, USIM_FILE_ID.AD.value)
-                        mnc_length = len(set_mnc)
-                        efad_data_response[3] = mnc_length
-                        response, sw1, sw2 = arg_connection.update_binary(
-                            efad_data_response)
-                        if sw1 == 0x90:
-                            mcc = convert_bcd_to_string(update_imsi[1:])[1:4]
-                            mnc = convert_bcd_to_string(update_imsi[1:])[
-                                4:4+mnc_length]
-                            ret_content = "MCC/MNC: %s/%s" % (mcc, mnc)
+                        if update_mnc:
+                            response, sw1, sw2 = select_file_in_adf(
+                                arg_connection, USIM_FILE_ID.AD.value)
+                            mnc_length = len(set_mnc)
+                            efad_data_response[3] = mnc_length
+                            response, sw1, sw2 = arg_connection.update_binary(
+                                efad_data_response)
+                            if sw1 == 0x90:
+                                ret_content = "Can't update the length of MNC!"
+
+                        mcc = convert_bcd_to_string(update_imsi[1:])[1:4]
+                        mnc = convert_bcd_to_string(update_imsi[1:])[
+                            4:4+mnc_length]
+                        ret_content = "MCC/MNC: %s/%s" % (mcc, mnc)
                     else:
                         ret_content = "Can't update the new MCC/MNC to EF_IMSI!"
 
