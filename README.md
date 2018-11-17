@@ -1,13 +1,13 @@
 # USIM modifier
 
 ---
-## Abstract
+# Abstract
 
 This is my 2nd practice project with Python, and it's a flexible SIM tool to modify some SIM files.  
 Yes, the tool is not a perfect tool for USIM modify, but I think its enough for most requirement.
 
 ---
-## Features
+# Features
 
 - Interactive mode
 - Flexible plugin mechanism
@@ -27,23 +27,28 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 > - status 1.00 > Displayed the current status of USIM
 
 ---
-## Requirement Packages
+# Requirement Packages
 
 - [colorama](https://pypi.org/project/colorama/)
->> ming_hsu@ubuntu:/$ pip3 install colorama  
 - [pyscard](https://pyscard.sourceforge.io/)  
+- [lxml](https://lxml.de/)  
+
+---
+# Prepare the environment
+
+## Linux
+>> ming_hsu@ubuntu:/$ pip3 install colorama  
 >> ming_hsu@ubuntu:/$ sudo apt-get install swig  
 >> ming_hsu@ubuntu:/$ sudo apt-get install libpcsclite-dev  
 >> ming_hsu@ubuntu:/$ sudo pip3 install pyscard
-- [lxml](https://lxml.de/) (UBuntu install by default)
 
 ---
-## Install "USIM modifier"
+# Install "USIM modifier"
 
 git clone https://github.com/minghsu/usim_modifier.git
 
 ---
-## User Guide
+# User Guide
 
 If you can see simlar message with below picture, it mean the system was works fine,  
 then you can type "exit" command to quit or "plugin" to get more information.  
@@ -71,7 +76,7 @@ For more detail, please refer "ETSI TS 131 102" specification.
 ![ERROR](/docs/images/update_fail.png "ERROR")
 
 ---
-## Tech Note
+# Tech Note
 
 Below image is the simple diagram of USIM modifier V2 project, my goal is using "MVC" pattern but looks it still have many problem (><).
 
@@ -81,6 +86,6 @@ Below image is the simple diagram of USIM modifier V2 project, my goal is using 
 The other parts will be coming soon ...
 
 ---
-## Reference
+# Reference
 - ETSI TS 102 221 - Smart Cards; UICC-Terminal interface; Physical and logical characteristics
 - ETSI TS 131 102 - UMTS; LTE;Characteristics of the Universal Subscriber Identity Module (USIM) application
