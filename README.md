@@ -37,10 +37,10 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 # Prepare the environment
 
 ## Linux
->> ming_hsu@ubuntu:/$ pip3 install colorama  
->> ming_hsu@ubuntu:/$ sudo apt-get install swig  
->> ming_hsu@ubuntu:/$ sudo apt-get install libpcsclite-dev  
->> ming_hsu@ubuntu:/$ sudo pip3 install pyscard
+> linux@ubuntu:/$ pip3 install colorama  
+> linux@ubuntu:/$ sudo apt-get install swig  
+> linux@ubuntu:/$ sudo apt-get install libpcsclite-dev  
+> linux@ubuntu:/$ sudo pip3 install pyscard
 
 ---
 # Install "USIM modifier"
@@ -63,10 +63,10 @@ After executed "plugin" command, will list all supported plugin name, version an
 ![Plugins](/docs/images/plugin.png "Plugins")
 
 We use "imsi" plugin as an example, you can use "help" parameter to find help info for each plugin.
->> - imsi help: Displayed the help message of "imsi" plugin
->> - imsi: Displayed the current "IMSI"
->> - imsi format=raw: Show the raw data of "IMSI"
->> - imsi set=46692: Update the IMSI value to "46692XXXXXXXXXX"
+> - imsi help: Displayed the help message of "imsi" plugin
+> - imsi: Displayed the current "IMSI"
+> - imsi format=raw: Show the raw data of "IMSI"
+> - imsi set=46692: Update the IMSI value to "46692XXXXXXXXXX"
 
 ![IMSI](/docs/images/imsi.png "IMSI")
 
