@@ -28,4 +28,5 @@
   <string name="env_check_welcome_msg">USIM modifier environment checking ...</string>
   <string name="env_check_result_ok">Result: All packages were installed</string>
   <string name="env_check_result_nok">Result: Missed some mandatory package</string>
+  <string name="transmit_error">Critical Error! Can't transmit the APDU command, system terminated!</string>
 </resource>

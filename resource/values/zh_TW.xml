@@ -21,4 +21,5 @@
   <string name="env_check_welcome_msg">USIM modifier 執行環境檢查程式 ...</string>
   <string name="env_check_result_ok">檢查結果: 所有套件已安裝</string>
   <string name="env_check_result_nok">檢查結果: 缺少部份套件</string>
+  <string name="transmit_error">嚴重錯誤! 無法發送 APDU 命令, 系統終止!</string>
 </resource>

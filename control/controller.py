@@ -12,8 +12,9 @@ from constant.error import ERROR
 from constant.plugin_column import plugin_column
 from view.consoles import consoles
 from constant.security import VERIFY_TYPE
-
 import view.viewer as viewer
+
+from smartcard.Exceptions import CardConnectionException
 
 
 class controller:
@@ -172,9 +173,14 @@ class controller:
                 if plugin_list != None:
                     for plugin in plugin_list:
                         if plugin[plugin_column.COL_NAME.value] == cmd_list[0]:
-                            viewer.print_formal_layout("\n" +
-                                                       self.__modeler.execute(cmd_list[0], " ".join(cmd_list[1:])))
-                            self.__state = STATE.COMMAND
-
+                            try:
+                                viewer.print_formal_layout("\n" +
+                                                           self.__modeler.execute(cmd_list[0], " ".join(cmd_list[1:])))
+                                self.__state = STATE.COMMAND
+                                break
+                            except CardConnectionException:
+                                viewer.print_error_layout("\n" +
+                                                          self.__resource.get_string("transmit_error"))
+                                os.sys.exit(1)
                 break
         return True
