@@ -13,7 +13,7 @@ execute_list = ["iccid",
                 "gid"]
 
 
-class status(base_plugin):
+class card_info(base_plugin):
     def __init__(self):
         self.__logging = logging.getLogger(os.path.basename(__file__))
 
@@ -35,7 +35,7 @@ class status(base_plugin):
             if ret_content != "":
                 ret_content += "\n"
 
-            ret_content += super(status, self).execute_plugin(
+            ret_content += super(card_info, self).execute_plugin(
                 plugin, arg_connection)
 
         return ret_content

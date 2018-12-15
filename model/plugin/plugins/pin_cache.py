@@ -15,7 +15,7 @@ from constant.security import DEF_SECURITY_CACHE_FOLDER
 from model.plugin.select import select_file_in_mf, USIM_FILE_ID
 
 
-class cache(base_plugin):
+class pin_cache(base_plugin):
     def __init__(self):
         self.__logging = logging.getLogger(os.path.basename(__file__))
 
