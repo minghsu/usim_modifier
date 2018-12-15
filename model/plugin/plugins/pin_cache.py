@@ -27,12 +27,12 @@ class pin_cache(base_plugin):
 
     def help(self):
         return ("Usage:\n"
-                " security pin1=xxxxxxxx adm=xxxxxxxxxxxxxxxx\n"
+                " pin_cache pin1=xxxxxxxx adm=xxxxxxxxxxxxxxxx\n"
                 "  - pin1: 4 ~ 8 digits\n"
                 "  - adm: 16 HEX digits\n"
                 "\n"
                 "Example:\n"
-                "  cache pin1=1234 adm=5555555555555555\n"
+                "  pin_cache pin1=1234 adm=5555555555555555\n"
                 "\n"
                 " PS. Using the ICCID as main file name.")
 
