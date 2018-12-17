@@ -27,13 +27,13 @@ class mccmnc(base_plugin):
                 "  - mccmnc [mcc=xxx] [mnc=xxx]\n"
                 "Example:\n"
                 "  - mccmnc\n"
-                "    > MCC: 466, MNC: 92\n"
+                "    > MCC/MNC: 466/92\n"
                 "  - mccmnc mcc=320\n"
-                "    > MCC: 320, MNC: 92\n"
+                "    > MCC/MNC: 320/92\n"
                 "  - mccmnc mnc=01\n"
-                "    > MCC: 466, MNC: 01\n"
+                "    > MCC/MNC: 466/01\n"
                 "  - mccmnc mcc=001 mnc=01\n"
-                "    > MCC: 001, MNC: 01")
+                "    > MCC/MNC: 001/01")
 
     @property
     def auto_execute(self):
