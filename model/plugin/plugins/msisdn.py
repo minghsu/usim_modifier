@@ -29,12 +29,16 @@ class msisdn(base_plugin):
                 'Example:\n'
                 '  - msisdn\n'
                 '   > EF_MSISDN #1 - Name: [Empty Content] (14), Number: 0928000000\n'
+                '   > EF_MSISDN #2 - Name: [Empty Content] (14), Number: 0928000000\n'
                 '  - msisdn format=raw\n'
                 '   > EF_MSISDN #1 - FF FF FF FF FF FF FF FF FF FF FF FF FF FF 06 81 90 82 00 00 00 FF FF FF FF FF FF FF\n'
+                '   > EF_MSISDN #2 - FF FF FF FF FF FF FF FF FF FF FF FF FF FF 06 81 90 82 00 00 00 FF FF FF FF FF FF FF\n'
                 '  - msisdn id=1 name=Orange num=+886919001122\n'
                 '   > EF_MSISDN #1 - Name: Orange (14), Number: +886919001122\n'
-                '  - msisdn id=1 name="My Test SIM"\n'
+                '   > EF_MSISDN #2 - Name: [Empty Content] (14), Number: 0928000000\n'
+                '  - msisdn id=2 name="My Test SIM"\n'
                 '   > EF_MSISDN #1 - Name: Orange (14), Number: +886919001122\n'
+                '   > EF_MSISDN #2- Name: My Test SIM (14), Number: 0928000000\n'
                 '\n'
                 'PS. For update MSISDN record, the "id" is a mandatory argument')
 
@@ -84,9 +88,9 @@ class msisdn(base_plugin):
 
                     if sw1 == 0x90:
                         update_msisdn_apdu = response[:]
+                        alpha_len = data_length - 14
                         if len(set_name_content) > 0:
                             # Name
-                            alpha_len = data_length - 14
                             update_alpha_len = len(set_name_content)
                             for i in range(alpha_len):
                                 if i < update_alpha_len:
@@ -95,6 +99,7 @@ class msisdn(base_plugin):
                                 else:
                                     update_msisdn_apdu[i] = 0xFF
 
+                        if len(set_num_content) > 0:
                             # Num Length
                             if len(set_num_content) % 2 == 1:
                                 update_msisdn_apdu[alpha_len] = int(
@@ -135,11 +140,11 @@ class msisdn(base_plugin):
                                     update_msisdn_apdu[num_apdu_index+i] = (
                                         update_msisdn_apdu[num_apdu_index+i] & 0xF0) + int(tmp[0])
 
-                            response, sw1, sw2 = arg_connection.update_record(
-                                set_record_id, update_msisdn_apdu)
+                        response, sw1, sw2 = arg_connection.update_record(
+                            set_record_id, update_msisdn_apdu)
 
-                            if sw1 == 0x90:
-                                ret_content = "MSISDN: Updated success"
+                        if sw1 == 0x90:
+                            ret_content = "MSISDN: Updated success"
 
             else:
                 for i in range(record_count):
