@@ -19,12 +19,12 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 > - send 1.00 > Send the APDU command to USIM directly
 > - mccmnc 1.00 > Display or modify the value of MCC/MNC.
 > - atr 1.00 > Displayed the value of Answer To Reset (ATR).
-> - cache 1.00 > Cache the PIN1/ADM code to xml file for future verify automatically.
+> - pin_cache 1.00 > Cache the PIN1/ADM code to xml file for future verify automatically.
 > - arr 1.00 > Displayed all contents of EF_ARR file.
 > - gid 1.00 > Display or modify the value of GID1/GID2.
 > - msisdn 1.00 > Display or modify the value of MSISDN.
 > - imsi 1.00 > Display or modify the value of IMSI.
-> - status 1.00 > Displayed the current status of USIM
+> - card_info 1.00 > Displayed the current status of USIM
 
 ---
 # Requirement Packages
