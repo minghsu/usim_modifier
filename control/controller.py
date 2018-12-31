@@ -181,6 +181,6 @@ class controller:
                             except CardConnectionException:
                                 viewer.print_error_layout("\n" +
                                                           self.__resource.get_string("transmit_error"))
-                                os.sys.exit(1)
+                                self.__state = STATE.EXIT
                 break
         return True
