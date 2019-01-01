@@ -22,6 +22,11 @@ class USIM_FILE_ID(Enum):
 
 
 def mf(arg_connection):
+    """ Select MF field and return the FCP with status words
+
+        Keyword arguments:
+         arg_connection: The connection created by pyscard
+    """
     response, sw1, sw2 = arg_connection.select(
         USIM_FILE_ID.MF.value, arg_p2_coding=CODING_P2_SELECT.SEL_RETURN_FCP.value)
 
@@ -29,6 +34,11 @@ def mf(arg_connection):
 
 
 def adfusim(arg_connection):
+    """ Select ADF USIM field and return the FCP with status words
+
+        Keyword arguments:
+         arg_connection: The connection created by pyscard
+    """
     response, sw1, sw2 = select_file_in_mf(
         arg_connection, USIM_FILE_ID.DIR.value)
 
@@ -51,7 +61,12 @@ def adfusim(arg_connection):
 
 
 def select_file_in_mf(arg_connection, arg_file_id):
+    """ Select USIM field under MF field and return FCP with status words
 
+        Keyword arguments:
+         arg_connection: The connection created by pyscard
+         arg_file_id: Which USIM field want to select
+    """
     response, sw1, sw2 = mf(arg_connection)
     if sw1 == 0x90:
         response, sw1, sw2 = arg_connection.select(
@@ -61,7 +76,12 @@ def select_file_in_mf(arg_connection, arg_file_id):
 
 
 def select_file_in_adf(arg_connection, arg_file_id):
+    """ Select USIM field under USIM ADF field and return FCP with status words
 
+        Keyword arguments:
+         arg_connection: The connection created by pyscard
+         arg_file_id: Which USIM field want to select
+    """
     response, sw1, sw2 = adfusim(arg_connection)
 
     if sw1 == 0x90:
