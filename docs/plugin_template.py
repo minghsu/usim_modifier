@@ -31,6 +31,11 @@ class plugin_template(base_plugin):
         # To decide this plugin will auto execute on system startup or not.
         return False
 
+    @property
+    def sort_index(self):
+        # The sort index can let you decide the priority of auto execution.
+        return 0xFFFF
+
     def execute(self, arg_connection, arg_parameter=""):
         self.__logging.debug("execute()")
 
