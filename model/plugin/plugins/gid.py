@@ -7,9 +7,9 @@ import os
 from smartcard.util import toHexString, toASCIIString, PACK, toBytes
 
 from model.plugin.plugins.base_plugin import base_plugin
-from utility.fcp import get_data_length, get_record_count
-from model.plugin.select import select_file_in_adf, USIM_FILE_ID
-from utility.convert import convert_arguments_to_dict
+from model.plugin.api.fcp import get_data_length, get_record_count
+from model.plugin.api.select import select_file_in_adf, USIM_FILE_ID
+from model.plugin.api.convert import convert_arguments_to_dict
 
 
 class gid(base_plugin):

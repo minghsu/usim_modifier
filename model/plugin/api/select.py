@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 from constant.apdu import CODING_P1_SELECT, CODING_P2_SELECT
 from smartcard.util import toHexString, PACK
-from utility.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
+from model.plugin.api.fcp import TLV_TAG, get_data_length, get_record_count, search_fcp_content
 from enum import Enum, unique
 
 
