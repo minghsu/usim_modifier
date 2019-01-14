@@ -42,6 +42,14 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 > linux@ubuntu:/$ sudo apt-get install libpcsclite-dev  
 > linux@ubuntu:/$ sudo pip3 install pyscard
 
+## MAC OSX
+> Pre-condition: “HomeBrew” must be installed.  
+  
+> mac@osx:/$ pip3 install colorama  
+> mac@osx:/$ pip3 install lxml  
+> mac@osx:/$ brew install swig.  install “swig” by homebrew  
+> mac@osx:/$ pip3 install pyscard  
+
 ---
 # Install "USIM modifier"
 
