@@ -59,7 +59,7 @@ class connection():
         return ret_atr
 
     def select(self, arg_field, arg_p1_coding=CODING_P1_SELECT.SEL_BY_FILE_ID.value, arg_p2_coding=CODING_P2_SELECT.SEL_RETURN_FCP.value):
-        self.__logging.debug("select() > Field: %s, P1: %02X, P2: %02X" % (
+        self.__logging.debug("select() > File ID: %s, P1: %02X, P2: %02X" % (
             arg_field, arg_p1_coding, arg_p2_coding))
         apdu_cmd = self.__apdu_factory.select(
             arg_field, arg_p1_coding, arg_p2_coding)
