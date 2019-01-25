@@ -47,7 +47,7 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
   
 > mac@osx:/$ pip3 install colorama  
 > mac@osx:/$ pip3 install lxml  
-> mac@osx:/$ brew install swig.  (PS. install “swig” by homebrew)
+> mac@osx:/$ brew install swig.  (PS. install “swig” by homebrew)  
 > mac@osx:/$ pip3 install pyscard  
 
 ---
