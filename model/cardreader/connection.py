@@ -59,6 +59,15 @@ class connection():
         return ret_atr
 
     def select(self, arg_field, arg_p1_coding=CODING_P1_SELECT.SEL_BY_FILE_ID.value, arg_p2_coding=CODING_P2_SELECT.SEL_RETURN_FCP.value):
+        """Selects a file according to the methods described
+            @param arg_field: File ID, DF name, or path to file, according to P1
+            @param arg_p1_coding: Selection control, refer “CODING_P1_SELECT”.
+            @param arg_p2_coding: Selection control, refer “CODING_P2_SELECT”.
+
+            @return response: Response APDU from USIM
+            @return	sw1: 1st byte of status word.
+            @return	sw2: 2nd byte of status word.
+        """
         self.__logging.debug("select() > File ID: %s, P1: %02X, P2: %02X" % (
             arg_field, arg_p1_coding, arg_p2_coding))
         apdu_cmd = self.__apdu_factory.select(
@@ -72,6 +81,14 @@ class connection():
         return (response, sw1, sw2)
 
     def verify(self, arg_verify_type, arg_verify_key):
+        """Verify PIN/ADM 
+            @param arg_verify_type: PIN1 (0x01) or ADM (0x0A)
+            @param arg_arg_verify_key: A list of bytes as verify code
+
+            @return response: Response APDU from USIM
+            @return	sw1: 1st byte of status word.
+            @return	sw2: 2nd byte of status word.
+        """
         self.__logging.debug(
             "verify() > type: %d, key: %s" % (arg_verify_type, toHexString(arg_verify_key)))
 
@@ -84,6 +101,13 @@ class connection():
         return (ERROR.ERR_VERIFY_FAIL, (sw2 & 0x0F))
 
     def read_binary(self, arg_length):
+        """Read binary data from USIM file
+            @param arg_length: Number of bytes to be read
+
+            @return response: Response APDU from USIM
+            @return	sw1: 1st byte of status word.
+            @return	sw2: 2nd byte of status word.
+        """
         self.__logging.debug(
             "read_binary() > length: %d" % (arg_length))
 
@@ -93,6 +117,13 @@ class connection():
         return (response, sw1, sw2)
 
     def update_binary(self, arg_update_content):
+        """Update binary data to USIM file
+            @param arg_update_content: Bytes of data to be update
+
+            @return response: Response APDU from USIM
+            @return	sw1: 1st byte of status word.
+            @return	sw2: 2nd byte of status word.
+        """
         self.__logging.debug(
             "update_binary() > %s" % (toHexString(arg_update_content)))
 
@@ -102,6 +133,14 @@ class connection():
         return (response, sw1, sw2)
 
     def read_record(self, arg_idx, arg_length):
+        """Read data from assigned record number
+            @param arg_idx: Record number
+            @param arg_length: Number of bytes to be read
+
+            @return response: Response APDU from USIM
+            @return	sw1: 1st byte of status word.
+            @return	sw2: 2nd byte of status word.
+        """
         self.__logging.debug(
             "read_record() > no: %d, length: %d" % (arg_idx, arg_length))
 
@@ -111,6 +150,14 @@ class connection():
         return (response, sw1, sw2)
 
     def update_record(self, arg_idx, arg_update_record):
+        """Update data to assigned record number
+            @param arg_idx: Record number
+            @param arg_update_record: Bytes of the data to be update
+
+            @return response: Response APDU from USIM
+            @return	sw1: 1st byte of status word.
+            @return	sw2: 2nd byte of status word.
+        """
         self.__logging.debug(
             "update_record() > no: %d, data: %s" % (arg_idx, toHexString(arg_update_record)))
 

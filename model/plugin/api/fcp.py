@@ -35,17 +35,16 @@ class EF_FILE_TYPE(Enum):
 def get_ef_file_type(arg_bytes=[]):
     """Returns the EF file type
 
-    Keyword arguments:
-        arg_bytes -- a list of bytes to stringify
+        @param arg_bytes: A list of bytes to stringify
               e.g. [62 1E 82 05 42 21 00 20 01 83
                     02 2F 00 A5 03 80 01 71 8A 01
                     05 8B 03 2F 06 01 80 02 00 20
                     88 00]
 
-    Return values:
-        EF_FILE_TYPE.TRANSPARENT: Transparent structure
-        EF_FILE_TYPE.LINER: Liner fixed structure
-        EF_FILE_TYPE.CYCLIC: Cyclic structure
+        @return:
+            - EF_FILE_TYPE.TRANSPARENT: Transparent structure
+            - EF_FILE_TYPE.LINER: Liner fixed structure
+            - EF_FILE_TYPE.CYCLIC: Cyclic structure
     """
     ret_file_type = None
 
@@ -66,16 +65,15 @@ def get_ef_file_type(arg_bytes=[]):
 def get_record_count(arg_bytes=[]):
     """Returns the record size of LINER/CYCLIC type
 
-    Keyword arguments:
-        arg_bytes -- a list of bytes to stringify
+       @param arg_bytes: A list of bytes to stringify
               e.g. [62 1E 82 05 42 21 00 20 01 83
                     02 2F 00 A5 03 80 01 71 8A 01
                     05 8B 03 2F 06 01 80 02 00 20
                     88 00]
 
-    Return values:
-        value -- Record size
-            0 -- Invalid input data
+        @return:
+            value -- Record size
+                0 -- Invalid input data
     """
     ret_record_size = 0
 
@@ -91,16 +89,15 @@ def get_record_count(arg_bytes=[]):
 def get_data_length(arg_bytes=[]):
     """Returns the data length by EF file
 
-    Keyword arguments:
-        arg_bytes -- a list of bytes to stringify
+       @param arg_bytes: A list of bytes to stringify
               e.g. [62 1E 82 05 42 21 00 20 01 83
                     02 2F 00 A5 03 80 01 71 8A 01
                     05 8B 03 2F 06 01 80 02 00 20
                     88 00]
 
-    Return values:
-        value -- For READ RECORD, READ BINARY commands
-            0 -- Invalid input data
+        @return
+            value -- For READ RECORD, READ BINARY commands
+                0 -- Invalid input data
     """
     ret_data_length = 0
 
@@ -120,16 +117,15 @@ def get_data_length(arg_bytes=[]):
 def get_pin1_status(arg_bytes=[]):
     """Returns the PIN1 status
 
-    Keyword arguments:
-        arg_bytes - - Get response from MF
+        @param arg_bytes: Get response from MF
               e.g. [62 1D 82 02 78 21 83 02 3F 00
                     A5 03 80 01 71 8A 01 05 8B 03
                     2F 06 01 C6 06 90 01 00 83 01
                     01]
 
-    Return value:
-         True: PIN1 enabled
-        False: PIN1 disabled
+        @return:
+            True: PIN1 enabled
+            False: PIN1 disabled
     """
     ret_value = False
 
@@ -146,31 +142,30 @@ def get_pin1_status(arg_bytes=[]):
 def search_fcp_content(arg_bytes=[], arg_tag=None):
     """Returns FCP content by TLV tag
 
-    Keyword arguments:
-        arg_bytes - - a list of bytes to stringify
+        @param arg_bytes: A list of bytes to stringify
               e.g. [62 1D 82 02 78 21 83 02 3F 00
                     A5 03 80 01 71 8A 01 05 8B 03
                     2F 06 01 C6 06 90 01 00 83 01
                     01]
 
-        arg_tag - - Which TAG for search
-            - 0x82: File Descriptor
-            - 0x83: File Identifier
-            - 0x84: DF name(AID)
-            - 0xA5: Proprietary information
-            - 0x8A: Life Cycle Status Integer
-            - 0x8B, 0x8C, 0xAB: Security attributes
-            - 0xC6: PIN Status Template DO
-            - 0x81: Total file size
-            - 0x80: File size
-            - 0x88: Short File Identifier(SFI)
-            - 0x4F: Application Identifier
-            - 0x50: Applicaiton Label
+            arg_tag - - Which TAG for search
+                - 0x82: File Descriptor
+                - 0x83: File Identifier
+                - 0x84: DF name(AID)
+                - 0xA5: Proprietary information
+                - 0x8A: Life Cycle Status Integer
+                - 0x8B, 0x8C, 0xAB: Security attributes
+                - 0xC6: PIN Status Template DO
+                - 0x81: Total file size
+                - 0x80: File size
+                - 0x88: Short File Identifier(SFI)
+                - 0x4F: Application Identifier
+                - 0x50: Applicaiton Label
 
-      PS. Refer 'ETSI TS 102 221'
+            PS. Refer 'ETSI TS 102 221'
 
-    Return values:
-        Return a list of bytes to stringify.
+        @return:
+            Return a list of bytes to stringify.
 
     Example:
         >> arg_bytes = [62 1D 82 02 78 21 83 02 3F 00 
