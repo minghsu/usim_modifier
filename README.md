@@ -58,17 +58,12 @@ git clone https://github.com/minghsu/usim_modifier.git
 ---
 # User Guide
 
-Please refer [USIM Modifier User Guide](https://github.com/minghsu/usim_modifier/blob/master/docs/usim_modifier_user_guide.pdf) for more detail
+Please refer [USIM Modifier User Guide](https://github.com/minghsu/usim_modifier/blob/master/docs/usim_modifier_user_guide.pdf) 
 
 ---
 # Tech Note
 
-Below image is the simple diagram of USIM modifier V2 project, my goal is using "MVC" pattern but looks it still have many problem (><).
-
-![Simple Diagram](/docs/images/simple-diagram.png "Simple Diagram")
-
-
-The other parts will be coming soon ...
+Please refer [USIM Modifier Tech_Note](https://github.com/minghsu/usim_modifier/blob/master/docs/usim_modifier_tech_note.pdf)
 
 ---
 # Reference
