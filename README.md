@@ -12,19 +12,19 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 - Interactive mode
 - Flexible plugin mechanism
 - Logging supported
-- Already support below plugins:
-> - iccid 1.00 > Display or modify the value of ICCID.
-> - spn 1.00 > Display or modify the value of SPN.
-> - dir 1.00 > Displayed all contents of EF_DIR file.
-> - send 1.00 > Send the APDU command to USIM directly
-> - mccmnc 1.00 > Display or modify the value of MCC/MNC.
-> - atr 1.00 > Displayed the value of Answer To Reset (ATR).
-> - pin_cache 1.00 > Cache the PIN1/ADM code to xml file for future verify automatically.
-> - arr 1.00 > Displayed all contents of EF_ARR file.
-> - gid 1.00 > Display or modify the value of GID1/GID2.
-> - msisdn 1.00 > Display or modify the value of MSISDN.
-> - imsi 1.00 > Display or modify the value of IMSI.
-> - card_info 1.00 > Displayed the current status of USIM
+- Below plugins were supported
+> - iccid: Display or modify the value of ICCID.
+> - spn: Display or modify the value of SPN.
+> - dir: Displayed all contents of EF_DIR file.
+> - send: Send the APDU command to USIM directly
+> - mccmnc: Display or modify the value of MCC/MNC.
+> - atr: Displayed the value of Answer To Reset (ATR).
+> - pin_cache: Cache the PIN1/ADM code to xml file for future verify automatically.
+> - arr: Displayed all contents of EF_ARR file.
+> - gid: Display or modify the value of GID1/GID2.
+> - msisdn: Display or modify the value of MSISDN.
+> - imsi: Display or modify the value of IMSI.
+> - card_info: Displayed the current status of USIM
 
 ---
 # Requirement Packages
@@ -32,6 +32,11 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 - [colorama](https://pypi.org/project/colorama/)
 - [pyscard](https://pyscard.sourceforge.io/)  
 - [lxml](https://lxml.de/)  
+
+---
+# Special Thanks
+
+Brian Beck: [switch class](http://code.activestate.com/recipes/410692/)
 
 ---
 # Prepare the environment
@@ -63,7 +68,7 @@ Please refer [USIM Modifier User Guide](https://github.com/minghsu/usim_modifier
 ---
 # Tech Note
 
-Please refer [USIM Modifier Tech_Note](https://github.com/minghsu/usim_modifier/blob/master/docs/usim_modifier_tech_note.pdf)
+Please refer [USIM Modifier Tech Note](https://github.com/minghsu/usim_modifier/blob/master/docs/usim_modifier_tech_note.pdf)
 
 ---
 # Reference
