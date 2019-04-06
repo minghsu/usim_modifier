@@ -27,6 +27,10 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 > - card_info: Displayed the current status of USIM
 
 ---
+# Card Info Example
+![Card Info](https://minghsu.github.io/usim_modifier/docs/images/card_info.png)
+
+---
 # Requirement Packages
 
 - [colorama](https://pypi.org/project/colorama/)
