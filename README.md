@@ -25,6 +25,7 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 > - msisdn: Display or modify the value of MSISDN.
 > - imsi: Display or modify the value of IMSI.
 > - card_info: Displayed the current status of USIM
+> - pin_count: Display all PIN/PUK/ADM retry counts. ( Added by 2019/07/21)
 
 ---
 # Card Info Example
