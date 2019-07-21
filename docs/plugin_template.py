@@ -4,9 +4,8 @@
 import logging
 import os
 
-
 from model.plugin.plugins.base_plugin import base_plugin
-from utility.convert import convert_arguments_to_dict
+from model.plugin.api.convert import  convert_arguments_to_dict
 
 
 class plugin_template(base_plugin):

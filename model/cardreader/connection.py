@@ -82,7 +82,7 @@ class connection():
 
     def verify(self, arg_verify_type, arg_verify_key):
         """Verify PIN/ADM 
-            @param arg_verify_type: PIN1 (0x01) or ADM (0x0A)
+            @param arg_verify_type: PIN1 (0x01), PIN2 or ADM (0x0A)
             @param arg_arg_verify_key: A list of bytes as verify code
 
             @return response: Response APDU from USIM
