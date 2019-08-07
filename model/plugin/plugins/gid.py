@@ -66,22 +66,24 @@ class gid(base_plugin):
             gid1_response, gid1_sw1, sw2 = arg_connection.read_binary(
                 data_length)
 
-        if update_gid1:
-            update_len = len(set_content1)
-            if update_len > data_length:
-                update_len = data_length
+            if update_gid1:
+                update_len = len(set_content1)
+                if update_len > data_length:
+                    update_len = data_length
 
-            for i in range(update_len):
-                gid1_response[i] = set_content1[i]
+                for i in range(update_len):
+                    gid1_response[i] = set_content1[i]
 
-            response, sw1, sw2 = arg_connection.update_binary(
-                gid1_response)
+                response, sw1, sw2 = arg_connection.update_binary(
+                    gid1_response)
 
-        if gid1_sw1 == 0x90:
-            ret_content = "GID1: %s (%d)\n" % (
-                toHexString(gid1_response), len(gid1_response))
+            if gid1_sw1 == 0x90:
+                ret_content = "GID1: %s (%d)\n" % (
+                    toHexString(gid1_response), len(gid1_response))
+            else:
+                ret_content = "GID1: Can't read/update the value from EF_GID1\n"
         else:
-            ret_content = "GID1: Can't read/update the value from EF_GID1\n"
+            ret_content = "GID1: Not Exist\n"
 
         # select EF_GID2
         response, sw1, sw2 = select_file_in_adf(
@@ -92,21 +94,23 @@ class gid(base_plugin):
             gid2_response, gid2_sw1, sw2 = arg_connection.read_binary(
                 data_length)
 
-        if update_gid2:
-            update_len = len(set_content2)
-            if update_len > data_length:
-                update_len = data_length
+            if update_gid2:
+                update_len = len(set_content2)
+                if update_len > data_length:
+                    update_len = data_length
 
-            for i in range(update_len):
-                gid2_response[i] = set_content2[i]
+                for i in range(update_len):
+                    gid2_response[i] = set_content2[i]
 
-            response, sw1, sw2 = arg_connection.update_binary(
-                gid2_response)
+                response, sw1, sw2 = arg_connection.update_binary(
+                    gid2_response)
 
-        if gid2_sw1 == 0x90:
-            ret_content += "GID2: %s (%d)" % (
-                toHexString(gid2_response), len(gid2_response))
+            if gid2_sw1 == 0x90:
+                ret_content += "GID2: %s (%d)" % (
+                    toHexString(gid2_response), len(gid2_response))
+            else:
+                ret_content += "GID2: Can't read/update the value from EF_GID2"
         else:
-            ret_content += "GID2: Can't read/update the value from EF_GID2"
+            ret_content += "GID2: Not Exist\n"            
 
         return ret_content
