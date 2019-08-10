@@ -6,6 +6,16 @@
 This is my 2nd practice project with Python, and it's a flexible SIM tool to modify some SIM files.  
 Yes, the tool is not a perfect tool for USIM modify, but I think its enough for most requirement.
 
+# Comment on 2019/08/10
+
+***The project was stop to enhance due to have new plan for next major release.
+In this project, I found the architectue is not good and cause so many issues, below items are my expected for next major release:***
+1. Multiple language support with plugin.
+2. More rigorous error handling to avoid the system crash if error occurs.  
+3. Provide 'security' (PIN manager) plugin on system level
+
+PS. Even I stop to enhance this projet, but will kept to resolve bugs.
+
 ---
 # Features
 
@@ -25,7 +35,8 @@ Yes, the tool is not a perfect tool for USIM modify, but I think its enough for 
 > - msisdn: Display or modify the value of MSISDN.
 > - imsi: Display or modify the value of IMSI.
 > - card_info: Displayed the current status of USIM
-> - pin_count: Display all PIN/PUK/ADM retry counts. ( Added by 2019/07/21)
+> - pin_count: Display all PIN/PUK/ADM retry counts. ( Added on 2019/07/21 )
+> - pin: To enable/disable the PIN1 or verify PIN2. ( Added on 2019/08/10 )
 
 ---
 # Card Info Example
