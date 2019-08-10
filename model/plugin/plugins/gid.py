@@ -20,7 +20,7 @@ class gid(base_plugin):
         return "Display or modify the value of GID1/GID2."
 
     def version(self):
-        return "1.00"
+        return "1.01"
 
     def help(self):
         return ("Usage:\n"
@@ -111,6 +111,6 @@ class gid(base_plugin):
             else:
                 ret_content += "GID2: Can't read/update the value from EF_GID2"
         else:
-            ret_content += "GID2: Not Exist\n"            
+            ret_content += "GID2: Not Exist\n"
 
         return ret_content

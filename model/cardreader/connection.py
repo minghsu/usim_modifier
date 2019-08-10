@@ -51,6 +51,12 @@ class connection():
 
         return ERROR.ERR_NONE
 
+    def set_pin1_enable_status(self, arg_enabled):
+        self.security.set_pin1_enabled(arg_enabled)
+
+    def get_pin1_enable_status(self):
+        return self.security.get_pin1_enabled()
+
     def get_atr(self):
         self.__logging.debug("get_atr()")
         ret_atr = None
@@ -80,14 +86,49 @@ class connection():
 
         return (response, sw1, sw2)
 
+    def disable_pin(self, arg_verify_key):
+        """Disable PIN 
+            @param arg_arg_verify_key: A list of bytes as verify code
+
+            @return response: Response APDU from USIM
+            @return	retry count: 1st byte of status word.
+        """
+        self.__logging.debug(
+            "disable pin() > key: %s" % (toHexString(arg_verify_key)))
+
+        apdu_cmd = self.__apdu_factory.disable_pin(arg_verify_key)
+        response, sw1, sw2 = self.__transmit(apdu_cmd)
+
+        if sw1 == 0x90:
+            return (ERROR.ERR_NONE, 0)
+
+        return (ERROR.ERR_VERIFY_FAIL, (sw2 & 0x0F))
+
+    def enable_pin(self, arg_verify_key):
+        """Enable PIN 
+            @param arg_arg_verify_key: A list of bytes as verify code
+
+            @return response: Response APDU from USIM
+            @return	retry count: 1st byte of status word.
+        """
+        self.__logging.debug(
+            "enable pin() > key: %s" % (toHexString(arg_verify_key)))
+
+        apdu_cmd = self.__apdu_factory.enable_pin(arg_verify_key)
+        response, sw1, sw2 = self.__transmit(apdu_cmd)
+
+        if sw1 == 0x90:
+            return (ERROR.ERR_NONE, 0)
+
+        return (ERROR.ERR_VERIFY_FAIL, (sw2 & 0x0F))
+
     def verify(self, arg_verify_type, arg_verify_key):
         """Verify PIN/ADM 
             @param arg_verify_type: PIN1 (0x01), PIN2 or ADM (0x0A)
             @param arg_arg_verify_key: A list of bytes as verify code
 
             @return response: Response APDU from USIM
-            @return	sw1: 1st byte of status word.
-            @return	sw2: 2nd byte of status word.
+            @return	retry count: 1st byte of status word.
         """
         self.__logging.debug(
             "verify() > type: %d, key: %s" % (arg_verify_type, toHexString(arg_verify_key)))
