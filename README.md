@@ -6,6 +6,10 @@
 This is my 2nd practice project with Python, and it's a flexible SIM tool to modify some SIM files.  
 Yes, the tool is not a perfect tool for USIM modify, but I think its enough for most requirement.
 
+# Updated on 2020/03/08
+
+USIM modifier V3.0 already release, you can [click this](https://github.com/minghsu/usim_modifier_v3) for more information.
+
 # Comment on 2019/08/10
 
 ***The project was stop to enhance due to have new plan for next major release.
